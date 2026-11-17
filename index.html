@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f9f7ed">
+<title>Color Garden · Little mixes, big magic</title>
+<style>
+:root{color-scheme:light;--paper:#f9f7ed;--ink:#294f48;--muted:#60796f;--green:#367563;--mint:#e7efe1;--coral:#e56b4f;--purple:#9672ca;--shadow:0 7px 0 #e7e8d9;--round:"Arial Rounded MT Bold","Trebuchet MS","Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--round);-webkit-tap-highlight-color:transparent;background-image:radial-gradient(#d7dfcd 1.2px,transparent 1.2px);background-size:27px 27px}button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}button:focus-visible,summary:focus-visible{outline:4px solid #293e70;outline-offset:5px}button{border:0}button:disabled{cursor:default}button svg{pointer-events:none}svg{display:block}button:active:not(:disabled){transform:translateY(3px)}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.shell{max-width:1180px;padding:24px 32px 18px;margin:auto}.header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}.brand svg{width:46px;height:46px}.brand-name{font-size:25px;font-weight:900;letter-spacing:-1px}.brand-note{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;margin-top:3px;color:var(--muted);font-weight:bold}.header-tools{display:flex;align-items:center;gap:10px}.icon-btn{width:48px;height:48px;display:grid;place-items:center;border:2px solid #dce5d5;border-radius:50%;background:#fffcf3}.icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.sound-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 16px;border:2px solid #dce5d5;border-radius:28px;background:#fffcf3;font-weight:bold;font-size:13px}.mode-switch{padding:5px;background:#e8eddf;border-radius:28px;display:flex;gap:4px}.mode-btn{display:flex;align-items:center;gap:7px;min-height:44px;padding:0 18px;background:transparent;border-radius:22px;color:#627969;font-weight:bold;font-size:14px}.mode-btn[aria-pressed=true]{background:#fffdf5;color:var(--ink);box-shadow:0 2px 6px #355d4110}
+.welcome{min-height:580px;display:grid;grid-template-columns:1fr 1.08fr;align-items:center;gap:12px;padding:24px 14px 28px}.welcome-copy{padding-left:22px}.eyebrow{font-size:12px;letter-spacing:2.6px;font-weight:bold;color:#6b816a;margin:0 0 20px;line-height:1.6}.welcome h1{font-size:clamp(44px,5.6vw,72px);line-height:1.06;letter-spacing:-3.8px;margin:0 0 24px;font-weight:900}.welcome h1 span{display:inline-block;color:#9672c1;position:relative}.welcome h1 span:after{content:"";position:absolute;left:2px;right:5px;bottom:-6px;height:7px;background:#e7dbed;border-radius:50%;transform:rotate(-2deg)}.welcome-text{font-size:19px;line-height:1.7;color:var(--muted);margin:0 0 32px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:64px;border-radius:23px;background:var(--coral);color:#fffdf6;padding:14px 30px;font-size:23px;font-weight:900;box-shadow:0 5px 0 #bd503b;transition:background .15s,transform .15s}.primary:active:not(:disabled){box-shadow:0 2px 0 #bd503b}.primary:disabled{background:#e5e9dd;color:#7a8a78;box-shadow:0 5px 0 #d9dece}.primary .icon{width:25px;height:25px}.quiet-note{margin-top:22px;font-size:12px;color:#74856b;letter-spacing:.5px;display:flex;align-items:center;gap:7px}.quiet-note .icon{width:16px;height:16px}.welcome-art{width:100%;height:auto;overflow:visible}.art-petal{transform-origin:250px 211px;animation:sway 6s ease-in-out infinite}.bee-drift{animation:drift 5s ease-in-out infinite}.sparkle{animation:twinkle 3s ease-in-out infinite}.intro-bottom{display:flex;justify-content:center;gap:40px;font-size:13px;color:#718269;padding:12px 0 16px}.intro-bottom span{display:flex;align-items:center;gap:8px}.little-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.game{max-width:1000px;margin:0 auto}.board{position:relative;background:#fffdf6;border:2px solid #e3e8d9;border-radius:36px;box-shadow:var(--shadow);overflow:hidden}.board-top{padding:23px 26px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.round-label{font-size:12px;letter-spacing:1.8px;font-weight:800;text-transform:uppercase;color:#7a8c72}.garden-progress{display:flex;gap:7px;align-items:center}.mini-flower{width:31px;height:31px;color:#e3e6d9}.mini-flower.filled{animation:pop .5s ease-out}.progress-label{font-size:12px;font-weight:bold;margin-right:6px;color:#718569}.challenge{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 16px 3px}.challenge h1{font-size:34px;letter-spacing:-1.3px;line-height:1.2;margin:0;text-align:center}.color-word{color:var(--purple)}.listen-btn{width:40px;height:40px;flex-shrink:0;background:#f0f3e7;border-radius:50%;display:grid;place-items:center}.listen-btn .icon{width:19px;height:19px}.instruction{margin:7px 14px 0;text-align:center;font-size:15px;color:#71816a;min-height:20px;line-height:1.5}.scene{width:100%;height:243px;position:relative;margin:0;overflow:hidden}.scene-svg{width:100%;height:100%}.target-petals{transition:fill .55s;transform-origin:500px 95px}.flower-celebrate .target-petals{animation:happy-flower .7s ease-out 2}.flower-celebrate .flower-stem{animation:sway 1s ease-in-out 2;transform-origin:500px 225px}.scene-caption{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:#fffdf5d9;border:1px solid #dae7c8;padding:6px 16px;border-radius:22px;font-size:12px;font-weight:bold;white-space:nowrap}.scene-caption:empty{display:none}.scene-butterfly{animation:drift 5s ease-in-out infinite}.scene-sun{animation:slow-spin 90s linear infinite;transform-origin:797px 61px}
+.mix-zone{position:relative;z-index:1;margin:-2px auto 0;padding:16px 28px 20px;background:#f3f5e9;border-top:1px solid #e2e8d4}.mix-row{display:flex;align-items:center;justify-content:center;gap:17px;min-height:75px}.scoop{width:68px;height:68px;border:2px dashed #b5c5a6;border-radius:24px;display:flex;align-items:center;justify-content:center;background:#fafbf4;position:relative;color:#9bad89;font-size:30px;font-weight:bold;flex-shrink:0;transition:background .2s,transform .2s}.scoop.selected{border:3px solid #fffdf6;box-shadow:0 3px 0 #cbd4bd;background:var(--paint);color:var(--paint-ink);animation:pop .25s ease-out}.scoop svg{width:28px;height:28px}.scoop:disabled:not(.selected){opacity:1}.scoop .remove-mark{position:absolute;right:-6px;top:-7px;background:#fffdf6;border:1px solid #d1dcc4;color:#526b55;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;font:17px Arial}.operator{font-size:28px;color:#92a77e;font-weight:bold}.mix-action{min-width:184px;margin-left:12px;min-height:65px;font-size:23px;border-radius:22px}.mix-action .icon{width:26px;height:26px}.status{margin:13px 0 0;text-align:center;min-height:25px;font-size:15px;font-weight:700;line-height:1.5;color:#687d5c}.hint-btn{background:transparent;border-radius:14px;color:#69805f;padding:8px 12px;font-weight:bold;font-size:13px;display:inline-flex;align-items:center;gap:6px;min-height:44px}.hint-btn .icon{width:17px;height:17px}.hint-btn:disabled{opacity:.45}.tool-line{display:flex;justify-content:center;margin-top:0;min-height:44px}.paint-tray{display:flex;justify-content:center;gap:28px;margin:26px auto 0;padding:0 15px}.paint-button{width:116px;min-height:126px;background:transparent;padding:0 8px 5px;border-radius:24px;position:relative;display:flex;flex-direction:column;align-items:center;gap:11px;font-size:15px;font-weight:800}.paint-button:disabled{opacity:.6}.paint-blob{position:relative;width:87px;height:81px;background:var(--paint);border-radius:42% 52% 43% 46%;box-shadow:inset 0 -7px 0 #0000000d,0 5px 0 #dedfcf;border:3px solid #fffefa;display:flex;align-items:center;justify-content:center;transform:rotate(var(--tilt));transition:transform .18s}.paint-button:hover:not(:disabled) .paint-blob{transform:translateY(-5px) rotate(0)}.paint-blob:before{content:"";position:absolute;top:11px;left:15px;width:21px;height:9px;background:#ffffff65;border-radius:100%;transform:rotate(-25deg)}.paint-blob svg{width:42px;height:25px;color:var(--paint-ink);transform:translateY(5px)}.paint-button.is-hint .paint-blob{outline:4px solid #537d40;outline-offset:5px;animation:hint-bounce 1.3s ease-in-out 2}.paint-button .scoop-count{display:none;position:absolute;right:3px;top:0;width:25px;height:25px;border:2px solid #fffdf6;background:var(--ink);color:#fff;font-size:13px;border-radius:50%;place-items:center;z-index:2}.paint-button.has-scoop .scoop-count{display:grid}.paint-label{display:flex;gap:5px;align-items:center}.paint-label .paint-symbol{width:14px;height:14px;color:#7d8b72}.footer{display:flex;justify-content:center;align-items:center;gap:8px;color:#849078;font-size:12px;margin:16px 0 0;text-align:center}.footer .icon{width:15px;height:15px}.footer button{padding:8px;color:#76846c;background:transparent;border-radius:10px;font-size:12px;text-decoration:underline;text-underline-offset:3px;min-height:36px}
+.mixing .scoop:first-child{animation:mix-left .8s ease-in-out infinite}.mixing .scoop:nth-child(3){animation:mix-right .8s ease-in-out infinite}.mixing .operator{animation:twinkle .6s ease-in-out infinite}.result-dot{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:-2px;margin:0 5px;border:1px solid #64755c30}.free-bowl{transform-origin:500px 175px}.mixing-bowl{animation:sway .4s ease-in-out infinite}.rainbow-sparkles{opacity:0}.flower-celebrate .rainbow-sparkles{animation:show-sparkles 1.5s ease-out}.confetti-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}.confetti{position:absolute;top:-20px;width:11px;height:17px;border-radius:3px;background:var(--confetti-color);animation:confetti-fall 1.9s ease-in both;animation-delay:var(--delay);left:var(--left)}
+.end-screen{text-align:center;padding:30px 24px 32px;position:relative;overflow:hidden}.end-screen .eyebrow{margin-bottom:12px}.end-screen h1{font-size:42px;letter-spacing:-1.8px;margin:0 0 12px}.end-screen p{font-size:17px;line-height:1.7;margin:0;color:#6a7d61}.bouquet{max-width:660px;margin:18px auto 8px;height:270px;display:flex;align-items:flex-end;justify-content:center;position:relative;isolation:isolate}.bouquet:before{content:"";position:absolute;bottom:0;left:0;right:0;height:100px;border-radius:50%;background:#e3edcc;z-index:-1}.bouquet-flower{width:116px;height:240px;flex-shrink:1;overflow:visible;transform:rotate(var(--rotate));animation:grow .65s backwards;animation-delay:var(--delay);transform-origin:center bottom}.end-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:24px}.secondary{display:inline-flex;justify-content:center;align-items:center;gap:8px;min-height:58px;background:#e8eddc;padding:12px 25px;border-radius:22px;font-size:18px;font-weight:800;box-shadow:0 4px 0 #d4dfc8}.secondary .icon{width:22px;height:22px}
+dialog{max-width:500px;width:calc(100% - 32px);max-height:85dvh;border:0;border-radius:28px;background:#fffdf6;color:var(--ink);padding:28px 30px;box-shadow:0 20px 90px #284d4a25}dialog::backdrop{background:#284e4766;backdrop-filter:blur(4px)}.dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.dialog-heading h2{margin:0;font-size:25px;letter-spacing:-.7px}.dialog-heading .icon-btn{width:42px;height:42px;flex-shrink:0}dialog p{font:15px/1.65 var(--round);color:#5c715c;margin:18px 0}dialog strong{color:var(--ink)}.recipe-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin:20px 0;font-size:13px;line-height:1.5}.recipe-list span{background:#f0f3e7;padding:8px;border-radius:12px}.small-note{font-size:12px!important}.dialog-actions{display:flex;justify-content:flex-end;margin-top:20px}.dialog-actions .secondary{font-size:16px;min-height:48px}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-8px)}}@keyframes twinkle{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1)}}@keyframes pop{0%{transform:scale(.7)}65%{transform:scale(1.12)}100%{transform:scale(1)}}@keyframes happy-flower{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-8deg) scale(1.08)}75%{transform:rotate(8deg) scale(1.08)}}@keyframes slow-spin{to{transform:rotate(360deg)}}@keyframes mix-left{0%,100%{transform:rotate(-8deg)}50%{transform:translate(15px,0) rotate(12deg)}}@keyframes mix-right{0%,100%{transform:rotate(8deg)}50%{transform:translate(-15px,0) rotate(-12deg)}}@keyframes hint-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}@keyframes show-sparkles{0%{opacity:0;transform:translateY(12px)}30%,65%{opacity:1}100%{opacity:0;transform:translateY(-15px)}}@keyframes confetti-fall{0%{transform:translateY(0) rotate(0);opacity:1}90%{opacity:1}100%{transform:translateY(650px) rotate(560deg);opacity:0}}@keyframes grow{from{transform:scale(.1) rotate(0);opacity:0}to{opacity:1}}
+@media(min-width:1450px){.shell{padding-top:38px}.header{margin-bottom:34px}.welcome{min-height:650px}.scene{height:265px}.paint-tray{margin-top:30px}}
+@media(max-width:850px){.shell{padding:20px 22px 14px}.brand-note{display:none}.brand-name{font-size:22px}.brand svg{width:40px;height:40px}.header{flex-wrap:wrap;gap:14px;margin-bottom:22px}.header-tools{margin-left:auto}.mode-switch{order:3;flex:0 0 auto;margin:0 auto}.header.game-active .mode-switch{display:flex}.welcome{min-height:530px;padding:10px 0 20px}.welcome-copy{padding-left:0}.welcome h1{font-size:53px;letter-spacing:-3px}.welcome-text{font-size:17px}.welcome-art{min-width:0}.intro-bottom{gap:20px}.board-top{padding:18px 20px 0}.challenge h1{font-size:31px}.scene{height:231px}.paint-tray{gap:18px;margin-top:24px}.paint-button{width:103px}.mix-zone{padding:15px 20px 17px}}
+@media(max-width:560px){.shell{padding:14px 12px 12px}.header{gap:12px;margin-bottom:15px}.brand-name{font-size:21px}.brand svg{width:36px;height:36px}.brand{gap:7px}.sound-btn{padding:0 12px;min-height:44px}.sound-text{display:none}.header-tools{gap:6px}.header-tools>.icon-btn{width:42px;height:42px}.header-tools .icon{width:21px;height:21px}.mode-switch{width:100%;justify-content:center}.mode-btn{flex:1;justify-content:center;min-height:42px;font-size:13px}.welcome{grid-template-columns:1fr;gap:0;min-height:0;padding:7px 14px 5px;text-align:center}.welcome-copy{display:contents}.welcome .eyebrow{font-size:10px;letter-spacing:2px;margin:4px 0 15px;order:0}.welcome h1{font-size:47px;letter-spacing:-2.7px;margin:0 0 10px;order:1}.welcome h1 br{display:none}.welcome h1 span{display:block}.welcome-text{font-size:15px;margin:12px 0 9px;order:3;line-height:1.5}.welcome-art{max-width:360px;width:95%;margin:-5px auto -12px;order:2}.welcome .primary{order:4;justify-self:center;min-height:60px;min-width:220px;font-size:22px;margin-top:8px}.quiet-note{order:5;justify-content:center;margin:20px 0 0;font-size:11px}.intro-bottom{gap:18px;font-size:11px;padding-top:20px}.intro-bottom span:last-child{display:none}.board{border-radius:26px}.board-top{padding:14px 15px 0;gap:6px}.round-label{font-size:10px;letter-spacing:1.2px}.mini-flower{width:23px;height:23px}.garden-progress{gap:4px}.progress-label{display:none}.challenge{gap:7px;margin-top:16px}.challenge h1{font-size:27px;letter-spacing:-1px}.listen-btn{width:36px;height:36px}.instruction{font-size:12px;line-height:1.5;margin:5px 8px 0;min-height:18px}.scene{height:192px}.scene-svg{width:780px;max-width:none;position:absolute;left:50%;transform:translateX(-50%)}.scene-caption{font-size:11px;bottom:10px;padding:5px 13px}.mix-zone{padding:14px 10px 15px}.mix-row{gap:10px;min-height:60px}.scoop{width:56px;height:57px;border-radius:20px;font-size:26px}.operator{font-size:23px}.mix-action{font-size:19px;min-width:129px;min-height:57px;margin-left:4px;padding:10px 15px;border-radius:20px;gap:6px}.mix-action .icon{width:20px;height:20px}.status{font-size:12px;margin-top:14px;min-height:36px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0 3px}.paint-tray{gap:5px;margin-top:22px;padding:0}.paint-button{width:76px;min-height:105px;padding:0 4px 5px;gap:11px;font-size:13px}.paint-blob{width:66px;height:64px;border-width:2px}.paint-blob svg{width:35px;height:23px}.paint-blob:before{width:16px;height:7px;left:10px;top:9px}.paint-button .scoop-count{right:1px;top:-3px;width:22px;height:22px;font-size:12px}.paint-label .paint-symbol{width:11px;height:11px}.paint-label{gap:3px}.hint-btn{font-size:12px}.footer{font-size:10px;gap:3px;margin-top:6px}.footer button{font-size:10px;padding:6px}.footer .icon{width:13px;height:13px}.end-screen{padding:25px 14px}.end-screen h1{font-size:33px}.end-screen p{font-size:15px}.end-screen .eyebrow{font-size:10px}.bouquet{height:225px;margin-top:20px}.bouquet-flower{width:20%;height:205px}.end-actions{gap:15px;margin-top:17px}.end-actions .primary{min-height:58px;font-size:20px}.end-actions .secondary{font-size:17px;min-height:53px}.recipe-list{grid-template-columns:1fr}dialog{padding:22px}.dialog-heading h2{font-size:23px}}
+@media(max-width:355px){.mix-row{gap:7px}.scoop{width:49px;height:52px}.mix-action{min-width:118px;padding:10px;font-size:18px}.paint-button{width:68px}.paint-blob{width:59px;height:60px}.challenge h1{font-size:24px}.brand-name{font-size:19px}.brand svg{width:30px;height:30px}.scene{height:180px}.footer{flex-wrap:wrap}.welcome h1{font-size:43px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.confetti-layer{display:none}}
+/* More possibilities for curious color experts. */
+.welcome-level{display:flex;align-items:center;gap:12px;margin:0 0 23px;font-size:13px;font-weight:bold;color:#65795c}.level-select{font:700 14px var(--round);color:var(--ink);border:2px solid #d6e0cb;background:#fffdf6;padding:10px 32px 10px 13px;border-radius:16px;min-height:44px;max-width:100%;cursor:pointer}.level-select:focus-visible{outline:3px solid #375879;outline-offset:3px}.challenge-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 4px 15px}.challenge-tools label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:bold}.level-description{margin:0;color:#6b7b62;font-size:13px;line-height:1.5}.expert-badge{display:inline-flex;align-items:center;gap:7px;background:#ece4f3;color:#7a529b;font-size:11px;font-weight:bold;letter-spacing:1px;border-radius:20px;padding:8px 13px;margin:0 0 17px}.mix-row{flex-wrap:wrap;gap:12px}.scoops{display:flex;align-items:center;justify-content:center;gap:10px}.scoop{width:62px;height:63px;font-size:22px;border-radius:20px}.scoop.selected{animation:none}.scoop-number{font-size:11px;font-weight:bold;color:#fff;background:#435b48;border:2px solid #fffdf6;width:22px;height:22px;position:absolute;left:-5px;bottom:-4px;display:grid;place-items:center;border-radius:50%}.operator{font-size:23px}.mix-action{margin-left:7px;min-width:176px}.paint-tray{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:7px;max-width:850px;margin-top:22px;padding:0 9px}.paint-button{width:100%;min-height:112px;font-size:13px;gap:10px;padding-left:4px;padding-right:4px}.paint-blob{width:74px;height:71px}.paint-blob svg{width:37px}.paint-label{font-size:13px}.paint-label .paint-symbol{width:12px;height:12px}.tool-line{gap:15px;margin-top:0}.clear-btn{background:transparent;font-size:13px;font-weight:bold;color:#76846c;min-height:44px;border-radius:15px;padding:8px 12px}.clear-btn:disabled{opacity:.5}.scene{height:211px}.scene-caption{max-width:90%;white-space:normal;text-align:center;line-height:1.4}.compare-strip{display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;margin:10px 12px 0;font-size:12px;color:#627258}.compare-item{display:flex;align-items:center;gap:6px}.compare-swatch{width:39px;height:26px;border-radius:10px;border:2px solid #ffffff;box-shadow:0 0 0 1px #e4e6d9}.compare-note{font-size:13px;font-weight:bold}.hint-recipe{display:flex;justify-content:center;align-items:center;gap:7px;flex-wrap:wrap;min-height:0;margin:6px 0}.hint-dot{width:29px;height:29px;display:grid;place-items:center;border-radius:50%;background:var(--paint);color:var(--paint-ink);border:2px solid #fff;box-shadow:0 1px 2px #456d4425}.hint-dot svg{width:13px;height:13px}.level-pill{color:#7854a0}.instruction{min-height:22px}.shade-compare{color:#7a529b}.mixing .scoop:nth-of-type(odd){animation:mix-left .8s ease-in-out infinite}.mixing .scoop:nth-of-type(even){animation:mix-right .8s ease-in-out infinite}.mixing .scoop:nth-child(3){animation:mix-left .8s ease-in-out infinite}.game .challenge h1{font-size:31px}.mode-switch{flex-shrink:0}
+@media(max-width:850px){.paint-tray{grid-template-columns:repeat(4,minmax(0,1fr));max-width:480px;gap:8px 10px}.paint-button{min-height:103px}.paint-blob{width:72px;height:68px}.challenge-tools{justify-content:center;gap:8px}.level-description{text-align:center}.welcome-level{flex-wrap:wrap;gap:8px}.welcome .primary{font-size:21px}}
+@media(max-width:560px){.welcome-level{order:4;justify-content:center;margin:15px 0 9px;gap:8px;font-size:12px}.welcome .primary{order:5}.quiet-note{order:6}.welcome-text{margin-top:5px}.welcome-art{width:85%;max-width:300px}.expert-badge{order:0;justify-self:center;font-size:10px;margin-bottom:12px}.welcome .eyebrow{display:none}.welcome h1{font-size:42px}.challenge-tools{gap:6px;margin-bottom:12px}.challenge-tools label{font-size:11px}.level-select{font-size:13px;padding:8px 28px 8px 11px}.level-description{font-size:11px;width:100%}.board-top{padding-top:12px}.challenge{margin-top:11px;align-items:center}.game .challenge h1{font-size:25px;line-height:1.15;max-width:calc(100% - 44px)}.listen-btn{width:40px;height:40px}.instruction{font-size:12px;margin-top:5px}.scene{height:167px}.scene-svg{width:690px}.mix-zone{padding:12px 10px 13px}.mix-row{gap:12px}.scoops{gap:6px}.scoop{width:51px;height:53px;border-radius:18px}.operator{font-size:18px}.mix-action{min-width:145px;margin-left:0;min-height:54px;font-size:19px}.mix-row.many-scoops{flex-direction:column;gap:11px}.mix-row.many-scoops .mix-action{min-width:196px;min-height:49px}.mix-row.many-scoops .scoops{gap:7px}.status{margin-top:12px;min-height:20px;font-size:12px}.paint-tray{gap:8px 4px;margin-top:20px;padding:0 4px}.paint-button{min-height:92px;gap:7px}.paint-blob{width:62px;height:60px}.paint-label{font-size:12px;gap:3px}.paint-label .paint-symbol{width:10px;height:10px}.paint-button .scoop-count{right:3px}.tool-line{gap:0;justify-content:space-around;margin-top:2px}.clear-btn{font-size:12px}.compare-strip{gap:7px;margin-top:7px}.compare-swatch{width:31px;height:24px}.compare-item{gap:4px;font-size:11px}.compare-note{font-size:11px}.hint-recipe{margin-top:4px}.scene-caption{font-size:10px;bottom:7px;padding:4px 10px}.end-screen h1{font-size:30px}}
+@media(max-width:355px){.scoops{gap:5px}.scoop{width:48px;height:51px}.mix-row.many-scoops .scoops{gap:6px}.game .challenge h1{font-size:23px}.paint-blob{width:56px;height:55px}.paint-button{min-height:87px}.paint-label{font-size:11px}.paint-label .paint-symbol{display:none}.welcome h1{font-size:39px}.mix-row:not(.many-scoops) .mix-action{min-width:129px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+/* One garden, from the first scoop to the flower that blooms. */
+.adventure-picker{margin:0 0 23px}.adventure-prompt{font-size:14px;font-weight:800;margin:0 0 12px;color:#496450}.adventure-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.adventure-choice{position:relative;min-width:0;background:#fffdf6;border:2px solid #e0e5d5;border-radius:22px;padding:15px 9px 13px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 4px 0 #e4e6d7;color:#496450;transition:transform .15s,background .15s,border-color .15s}.adventure-choice:hover{border-color:#b9a2d0;transform:translateY(-3px)}.adventure-choice[aria-pressed=true]{border-color:#9271b5;background:#f1eaf7;box-shadow:0 4px 0 #cbb8df;color:#65458a}.adventure-choice[aria-pressed=true]:after{content:'✓';position:absolute;top:6px;right:9px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#8864ab;color:white;font:700 13px Arial}.adventure-illustration{width:63px;height:58px}.adventure-name{font-weight:900;font-size:16px;line-height:1.2}.adventure-count{font-size:13px;font-weight:bold;display:flex;align-items:center;gap:5px}.scoop-dots{display:flex;gap:3px;align-items:center;height:11px}.scoop-dots i{width:8px;height:8px;border-radius:50%;background:#cbbadc}.scoop-dots i:nth-child(2){background:#e5b266}.scoop-dots i:nth-child(3){background:#7da8a0}.scoop-dots i:nth-child(4){background:#e49a9c}.adventure-description{font-size:13px;line-height:1.5;color:#6b7b62;margin:12px 0 0;min-height:20px}.welcome{grid-template-columns:1.03fr 1fr}.welcome-copy{padding-left:12px}.welcome h1{font-size:clamp(44px,5vw,65px);margin-bottom:20px}.welcome-text{margin-bottom:23px}.welcome .adventure-picker{max-width:460px}.welcome-art{align-self:center}.intro-bottom{margin-top:5px}.challenge-tools{display:block;max-width:615px;margin:0 auto 17px}.challenge-tools .adventure-choices{gap:9px}.challenge-tools .adventure-choice{flex-direction:row;align-items:center;justify-content:center;gap:9px;padding:9px 18px 9px 11px;border-radius:21px;min-height:64px}.challenge-tools .adventure-illustration{width:40px;height:40px;flex-shrink:0}.challenge-tools .adventure-name{font-size:14px}.adventure-copy{display:flex;flex-direction:column;align-items:center;gap:5px}.challenge-tools .adventure-copy{align-items:flex-start}.challenge-tools .adventure-count{font-size:11px}.challenge-tools .scoop-dots{display:none}.challenge-tools .adventure-choice[aria-pressed=true]:after{width:15px;height:15px;top:4px;right:5px;font-size:10px}.challenge-tools .level-description{text-align:center;margin-top:11px;font-size:11px}.challenge-tools .adventure-prompt{display:none}
+.color-results{position:relative;isolation:isolate;padding:15px 30px 21px;overflow:hidden;text-align:center;background:#fffdf6}.result-landscape{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;max-width:740px;margin:0 auto;align-items:start}.result-card{min-width:0;margin:0;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}.result-heading{display:flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:7px 15px;border-radius:18px;background:#fffef8;border:1px solid #e3e7d8;font-size:14px;font-weight:800;line-height:1.3;color:#496450;position:relative;z-index:1;box-shadow:0 3px 0 #e8ebdd}.result-heading:after{content:'';position:absolute;bottom:-6px;left:calc(50% - 5px);height:10px;width:10px;background:#fffef8;border-right:1px solid #e3e7d8;border-bottom:1px solid #e3e7d8;transform:rotate(45deg)}.result-heading .icon{width:18px;height:18px;flex-shrink:0}.result-swatch{display:block;position:relative;width:100%;max-width:320px;height:262px;flex-shrink:0;background:transparent!important;border:0;border-radius:50%;outline:0;box-shadow:none;padding:0;color:var(--result-ink,#344f40);cursor:pointer;touch-action:manipulation}.result-swatch:focus-visible{outline:3px dashed #7e629d;outline-offset:3px}.result-swatch:active:not(:disabled){transform:none}.result-swatch:hover .paint-character{transform:translateY(-3px)}.paint-character{width:100%;height:100%;display:block;overflow:visible;transform-origin:50% 87%;transition:transform .15s}.buddy-color{fill:var(--result-color,#baa4d1);stroke:#63755535;stroke-width:1.3}.buddy-face{color:var(--result-ink,#344f40)}.buddy-flower{display:none}.character-target .buddy-flower{display:block}.character-target .buddy-blob{display:none}.character-shadow{fill:#baca9e;opacity:.5}.result-color-name{font-size:17px;font-weight:800;line-height:1.4;margin:-2px 0 0;color:#3e604f;max-width:95%;overflow-wrap:anywhere;position:relative;z-index:1}.result-feedback{margin:14px auto 0;font-size:14px;line-height:1.5;font-weight:bold;color:#496450;max-width:620px}.result-recipe{font-size:12px;line-height:1.6;margin:4px 0 0;color:#60725d;overflow-wrap:anywhere}.result-caption{display:flex;justify-content:center;align-items:center;gap:6px;font-size:11px;color:#65815d;margin:9px 0 0}.result-caption .icon{width:14px;height:14px}.color-results[data-mode=free] .result-grid,.color-results[data-result=won] .result-grid{grid-template-columns:minmax(0,1fr);max-width:480px}.color-results[data-mode=free] .result-swatch{height:300px;max-width:400px}.color-results[data-result=won] .result-swatch{height:300px;max-width:370px}.color-results[data-result=won] .buddy-flower{display:block}.color-results[data-result=won] .buddy-blob{display:none}.color-results[data-mode=free] .result-color-name,.color-results[data-result=won] .result-color-name{font-size:23px}.color-results[data-result=won] .paint-character{animation:flower-bloom .85s cubic-bezier(.2,.8,.2,1) both}.color-results[data-result=retry] #actual-swatch .paint-character,.color-results[data-mode=free] #actual-swatch .paint-character{animation:friend-arrives .65s ease-out both}.color-results[data-result=adjusting] #actual-swatch .paint-character{animation:none}.garden-plot{display:flex;align-items:flex-end;justify-content:center;gap:9px;min-height:0;margin:7px auto 0}.garden-plot:empty{display:none}.garden-plot svg{width:30px;height:37px;animation:flower-bloom .6s ease-out both}.garden-plot-label{font-size:11px;color:#678060;font-weight:bold;margin-right:2px}.scene-caption{background:#fffdf6eb}.result-swatch.is-booping .paint-character{animation:buddy-boop .55s ease-in-out!important}.character-sparkles{fill:#e2bf66;opacity:0}.color-results[data-result=won] .character-sparkles{animation:reveal-stars 1.4s ease-out}.garden-award{color:#658b4e}.welcome .quiet-note{margin-top:19px}
+@keyframes flower-bloom{0%{transform:scale(.3) translateY(35px);opacity:0}60%{transform:scale(1.09) translateY(-4px);opacity:1}100%{transform:scale(1) translateY(0);opacity:1}}@keyframes friend-arrives{0%{transform:translateY(25px) scale(.8);opacity:0}60%{transform:translateY(-8px) scale(1.03);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}@keyframes buddy-boop{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(6px) scale(1.05,.93)}60%{transform:translateY(-18px) scale(.96,1.04)}}@keyframes reveal-stars{0%{opacity:0}35%,70%{opacity:1}100%{opacity:0}}
+@media(max-width:850px){.welcome h1{font-size:49px}.welcome-text{font-size:16px}.adventure-choice{padding:13px 6px 11px;border-radius:18px}.adventure-illustration{width:54px;height:52px}.adventure-name{font-size:14px}.adventure-count{font-size:12px}.color-results{padding:17px 22px 21px}.result-swatch{height:250px}.color-results[data-mode=free] .result-swatch,.color-results[data-result=won] .result-swatch{height:285px}}
+@media(max-width:560px){.welcome .adventure-picker{order:4;max-width:none;width:100%;margin:16px 0 17px}.welcome .adventure-prompt{font-size:13px;margin-bottom:10px}.adventure-choices{gap:8px}.adventure-choice{padding:14px 5px 11px;gap:6px;border-radius:18px;min-height:125px}.adventure-illustration{width:49px;height:47px}.adventure-name{font-size:13px}.adventure-count{font-size:11px}.adventure-description{font-size:12px;margin-top:12px}.adventure-choice[aria-pressed=true]:after{width:16px;height:16px;font-size:11px;top:5px;right:5px}.scoop-dots{gap:3px;height:9px}.scoop-dots i{width:7px;height:7px}.welcome-art{width:80%;max-width:260px;margin-top:-3px;margin-bottom:0}.welcome h1{font-size:40px;margin-bottom:5px}.welcome-text{margin:3px 0 0;font-size:14px}.welcome .primary{order:5;min-height:57px;margin-top:0}.welcome .quiet-note{order:6;margin-top:18px}.intro-bottom{padding-top:12px;font-size:10px;gap:13px}.challenge-tools{max-width:100%;margin-bottom:12px}.challenge-tools .adventure-choice{padding:9px 6px 8px;min-height:76px;flex-direction:column;gap:4px;border-radius:18px}.challenge-tools .adventure-illustration{width:33px;height:30px}.challenge-tools .adventure-copy{align-items:center;gap:3px}.challenge-tools .adventure-name{font-size:12px}.challenge-tools .adventure-count{font-size:10px}.challenge-tools .level-description{display:none}.challenge-tools .adventure-choices{gap:7px}.color-results{padding:14px 12px 18px}.result-grid{gap:8px}.result-heading{min-height:34px;padding:6px 10px;font-size:12px;gap:4px;border-radius:15px;max-width:100%}.result-heading .icon{width:15px;height:15px}.result-swatch{height:190px;max-width:220px}.result-color-name{font-size:14px;line-height:1.3;margin:0}.result-feedback{font-size:12px;margin-top:11px}.result-recipe{font-size:11px;margin-top:5px}.result-caption{font-size:10px;margin-top:8px;gap:4px}.color-results[data-mode=free] .result-swatch,.color-results[data-result=won] .result-swatch{height:270px;max-width:340px}.color-results[data-mode=free] .result-color-name,.color-results[data-result=won] .result-color-name{font-size:22px}.garden-plot{gap:6px;margin-top:5px}.garden-plot svg{width:25px;height:31px}.garden-plot-label{font-size:10px}.game .challenge h1{font-size:25px}.round-label{font-size:9px;letter-spacing:1px}.result-landscape .scene-cloud{display:none}}
+@media(max-width:560px){.welcome{grid-template-columns:1fr;text-align:center}.color-results[data-result=won] .result-color-name,.color-results[data-result=won] .result-recipe,.color-results[data-mode=free] .result-color-name{display:none}.color-results[data-result=won] .result-swatch{height:230px}.color-results[data-mode=free] .result-swatch{height:250px}.challenge-tools .adventure-choice{min-height:68px}}
+@media(max-width:355px){.adventure-choice{min-height:116px}.adventure-name{font-size:12px}.adventure-illustration{width:44px;height:43px}.adventure-choices{gap:6px}.challenge-tools .adventure-name{font-size:11px}.challenge-tools .adventure-choice{padding-left:4px;padding-right:4px}.result-swatch{height:168px}.result-grid{gap:6px}.result-heading{font-size:11px;padding:6px 8px}.result-heading .icon{width:13px;height:13px}.result-color-name{font-size:13px}.color-results[data-mode=free] .result-swatch,.color-results[data-result=won] .result-swatch{height:246px}.game .challenge h1{font-size:23px}.welcome h1{font-size:37px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.result-swatch:hover .paint-character{transform:none}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs>
+ <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 4 5 9H2v6h3l6 5z"/><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></symbol>
+ <symbol id="i-muted" viewBox="0 0 24 24"><path d="M11 4 5 9H2v6h3l6 5zM16 9l6 6m0-6-6 6"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+ <symbol id="i-mix" viewBox="0 0 24 24"><path d="m17 3-5 10M5 11h14l-2 9H7zM3 11h18M18 2l2 1"/><path d="M8 7c-2-2 2-3 0-5"/></symbol>
+ <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-9M12 15C3 16 2 9 2 5c7-1 11 2 10 10ZM12 11c0-6 4-9 10-8 0 6-3 10-10 8Z"/></symbol>
+ <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></symbol>
+ <symbol id="i-hint" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4M8 14a7 7 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3Z"/></symbol>
+ <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 5c-3-3-6-1-8 1-2-2-5-4-8-1-5 5 3 11 8 15 5-4 13-10 8-15Z"/></symbol>
+ <symbol id="i-again" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 3 8M3 4v7h7"/></symbol>
+ <symbol id="s-red" viewBox="0 0 20 20"><path d="m10 2 8 15H2z" fill="currentColor"/></symbol>
+ <symbol id="s-yellow" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="currentColor"/></symbol>
+ <symbol id="s-blue" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2" fill="currentColor"/></symbol>
+ <symbol id="s-white" viewBox="0 0 20 20"><path d="m10 1 9 9-9 9-9-9z" fill="currentColor"/></symbol>
+ <symbol id="happy-face" viewBox="0 0 46 28"><ellipse cx="13" cy="9" rx="2.3" ry="3.2" fill="currentColor"/><ellipse cx="33" cy="9" rx="2.3" ry="3.2" fill="currentColor"/><path d="M18 17q5 6 10 0" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></symbol>
+ <symbol id="flower-mark" viewBox="0 0 50 50"><g fill="currentColor"><ellipse cx="25" cy="13" rx="9" ry="12"/><ellipse cx="25" cy="37" rx="9" ry="12"/><ellipse cx="13" cy="25" rx="12" ry="9"/><ellipse cx="37" cy="25" rx="12" ry="9"/><ellipse cx="16" cy="16" rx="9" ry="10" transform="rotate(-45 16 16)"/><ellipse cx="34" cy="34" rx="9" ry="10" transform="rotate(-45 34 34)"/><ellipse cx="34" cy="16" rx="9" ry="10" transform="rotate(45 34 16)"/><ellipse cx="16" cy="34" rx="9" ry="10" transform="rotate(45 16 34)"/></g><circle cx="25" cy="25" r="10" fill="#ffdf78"/></symbol>
+<symbol id="s-orange" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="4"/></symbol><symbol id="s-green" viewBox="0 0 20 20"><path d="M3 16C-1 6 8 1 17 2c2 10-5 17-14 14Z" fill="currentColor"/></symbol><symbol id="s-purple" viewBox="0 0 20 20"><path d="M16 3A8 8 0 1 0 17 15C8 18 3 6 16 3Z" fill="currentColor"/></symbol><symbol id="s-black" viewBox="0 0 20 20"><path d="m10 1 3 6 6 1-5 4 2 7-6-4-6 4 2-7-5-4 6-1z" fill="currentColor"/></symbol><symbol id="adventure-explorer" viewBox="0 0 80 74"><ellipse cx="40" cy="66" rx="25" ry="4" fill="#d5e0bb"/><path d="M40 53V29" stroke="#6e9a65" stroke-width="5" stroke-linecap="round"/><path d="M39 41C19 42 17 26 19 18c16 0 23 9 20 23" fill="#9bbb7e"/><path d="M41 32c0-17 13-22 25-20 1 13-10 22-25 20" fill="#79a46e"/><path d="m24 48 5 17h22l5-17" fill="#e5a078"/><rect x="21" y="44" width="38" height="8" rx="4" fill="#efb58c"/><circle cx="35" cy="55" r="1.7" fill="#6e6549"/><circle cx="45" cy="55" r="1.7" fill="#6e6549"/><path d="M36 60q4 4 8 0" fill="none" stroke="#6e6549" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="adventure-wizard" viewBox="0 0 80 74"><ellipse cx="40" cy="66" rx="27" ry="4" fill="#e0d6ea"/><circle cx="40" cy="49" r="20" fill="#ffe2a0"/><path d="M19 41 36 7q8 17 23 34" fill="#a28ac7"/><path d="m29 20 5-9 6 17" fill="#bba2dc"/><ellipse cx="40" cy="41" rx="31" ry="6" fill="#9274b7"/><path d="m42 23 2 4 5 1-4 3 1 4-4-2-3 2 1-4-4-3 4-1z" fill="#ffdfa0"/><circle cx="33" cy="50" r="2" fill="#6d674b"/><circle cx="47" cy="50" r="2" fill="#6d674b"/><path d="M35 57q5 5 10 0" stroke="#6d674b" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="adventure-master" viewBox="0 0 80 74"><ellipse cx="40" cy="66" rx="27" ry="4" fill="#eee1bb"/><path d="M18 45c-5-21 15-33 34-28s25 24 10 39-41 10-44-11" fill="#e9a06e"/><path d="m21 21-4-15 13 8 10-12 10 12 13-8-4 15z" fill="#ecc75e"/><rect x="21" y="19" width="38" height="7" rx="3" fill="#f2d67b"/><circle cx="32" cy="42" r="2" fill="#7c6144"/><circle cx="48" cy="42" r="2" fill="#7c6144"/><path d="M35 50q5 6 10 0" stroke="#7c6144" stroke-width="2" fill="none" stroke-linecap="round"/><path d="m9 37 2 5 5 2-5 2-2 5-2-5-5-2 5-2zM70 31l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#e4c15f"/></symbol>
+<symbol id="paint-pal-body" viewBox="0 0 300 300"><ellipse class="character-shadow" cx="150" cy="279" rx="100" ry="11"/><path d="m111 235-9 32h-14m100-32 10 32h14" fill="none" stroke="#6e8562" stroke-width="8" stroke-linecap="round"/><path d="M47 164q-22 2-25-19m232 19q23-1 25-19" fill="none" stroke="#6e8562" stroke-width="7" stroke-linecap="round"/><path class="buddy-color" d="M37 139C23 92 55 35 112 37c61-27 133 1 151 59 35 47 17 111-29 133-50 37-127 31-163-3-29-11-46-50-34-87Z"/><g class="buddy-face"><use href="#happy-face" x="106" y="116" width="88" height="56"/></g></symbol>
+<symbol id="flower-pal-body" viewBox="0 0 300 300"><ellipse class="character-shadow" cx="150" cy="279" rx="87" ry="10"/><path d="M150 274V147" stroke="#709b67" stroke-width="9" stroke-linecap="round"/><path d="M147 245c-42 0-60-26-58-47 34 1 54 21 58 47" fill="#96b97c"/><path d="M154 229c40 0 57-26 54-47-33 2-50 23-54 47" fill="#7fa56b"/><path d="m101 211 37 28m24-18 33-27" stroke="#668f59" stroke-width="2" fill="none" stroke-linecap="round"/><use href="#flower-mark" x="29" y="0" width="242" height="242" style="color:var(--result-color,#baa4d1)"/><use href="#happy-face" x="118" y="102" width="64" height="40" style="color:#596a48"/></symbol></defs></svg>
+<div class="shell">
+ <header class="header" id="header">
+  <div class="brand"><svg viewBox="0 0 50 50" aria-hidden="true" style="color:#a990cf"><use href="#flower-mark"/><g fill="#516553"><circle cx="22" cy="24" r="1.3"/><circle cx="28" cy="24" r="1.3"/></g><path d="M22 28q3 3 6 0" stroke="#516553" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg><div><div class="brand-name">color garden</div><div class="brand-note">little mixes, big magic</div></div></div>
+  <nav class="mode-switch" id="mode-switch" aria-label="Choose an activity" hidden><button class="mode-btn" id="garden-mode" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-sprout"/></svg>Grow flowers</button><button class="mode-btn" id="free-mode" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-mix"/></svg>Just mix</button></nav>
+  <div class="header-tools"><button class="sound-btn" id="sound-button" aria-label="Turn sound off" aria-pressed="true"><svg class="icon" aria-hidden="true"><use id="sound-icon" href="#i-sound"/></svg><span class="sound-text" id="sound-label">Sound on</span></button><button class="icon-btn" id="help-button" aria-label="Grown-up guide"><span style="font-size:22px;font-weight:bold" aria-hidden="true">?</span></button></div>
+ </header>
+ <main>
+  <section class="welcome" id="welcome" aria-labelledby="welcome-title">
+   <div class="welcome-copy"><p class="eyebrow">For curious color experts</p><h1 id="welcome-title">Little mixes.<br><span>Big magic.</span></h1><p class="welcome-text">Find the shade. Crack the recipe.<br>Grow a garden full of color magic.</p><div class="adventure-picker"><p class="adventure-prompt">Pick your color adventure</p><div class="adventure-choices" id="welcome-adventures" role="group" aria-label="Choose your color adventure"></div><p class="adventure-description" id="welcome-adventure-description">Three scoops. So many secret recipes!</p></div><button class="primary" id="start-button">Let’s play!<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button><div class="quiet-note"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>No rush. No wrong turns. Just wonder.</div></div>
+   <svg class="welcome-art" viewBox="0 0 520 500" role="img" aria-label="A happy purple flower surrounded by smiling paints in a sunny garden">
+    <path d="M43 248C27 96 151 23 292 44S519 196 474 333 183 494 77 400C39 367 34 307 43 248" fill="#e9eedb"/><path d="M71 352q176-72 381-10-10 110-189 118C139 454 85 413 71 352" fill="#d5e3b9"/>
+    <g fill="#e4c96b" class="sparkle"><path d="m79 137 4 11 12 4-12 4-4 11-4-11-12-4 12-4z"/><path d="m416 260 3 9 10 3-10 4-3 9-3-9-10-4 10-3z"/></g>
+    <g transform="translate(393 94)"><g stroke="#e9c969" stroke-width="4" stroke-linecap="round"><path d="M0-38v-9M0 38v9M-38 0h-9M38 0h9M-27-27l-6-6M27 27l6 6M27-27l6-6M-27 27l-6 6"/></g><circle r="28" fill="#f2d578"/><circle cx="-8" cy="-2" r="2" fill="#7b7846"/><circle cx="8" cy="-2" r="2" fill="#7b7846"/><path d="M-6 7q6 6 12 0" stroke="#7b7846" stroke-width="2" stroke-linecap="round" fill="none"/></g>
+    <path d="M250 353V211" stroke="#64966b" stroke-width="11" stroke-linecap="round"/><path d="M249 313c-53 2-77-27-73-53 46 0 70 21 73 53" fill="#85af72"/><path d="M252 287c53 1 70-32 64-54-41 4-60 26-64 54" fill="#6e9a65"/><path d="m190 274 48 32m25-29 40-31" stroke="#577e50" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <g class="art-petal"><g fill="#aa89d2"><ellipse cx="250" cy="155" rx="35" ry="49"/><ellipse cx="250" cy="265" rx="35" ry="49"/><ellipse cx="195" cy="211" rx="48" ry="35"/><ellipse cx="305" cy="211" rx="48" ry="35"/><ellipse cx="210" cy="171" rx="35" ry="46" transform="rotate(-45 210 171)"/><ellipse cx="290" cy="251" rx="35" ry="46" transform="rotate(-45 290 251)"/><ellipse cx="290" cy="171" rx="35" ry="46" transform="rotate(45 290 171)"/><ellipse cx="210" cy="251" rx="35" ry="46" transform="rotate(45 210 251)"/></g><circle cx="250" cy="211" r="48" fill="#ffe29a"/><ellipse cx="233" cy="205" rx="3.8" ry="5" fill="#586448"/><ellipse cx="267" cy="205" rx="3.8" ry="5" fill="#586448"/><path d="M239 220q11 13 22 0" fill="none" stroke="#586448" stroke-width="3.2" stroke-linecap="round"/><ellipse cx="219" cy="218" rx="7" ry="4" fill="#f3bb91"/><ellipse cx="281" cy="218" rx="7" ry="4" fill="#f3bb91"/></g>
+    <path d="m195 348 13 68q43 16 84 0l13-68" fill="#dc9473"/><path d="m198 359 10 57q43 16 84 0l3-15q-67 13-83-42" fill="#ce8061" opacity=".55"/><rect x="187" y="337" width="126" height="28" rx="10" fill="#e7a582"/><path d="M235 391h30" stroke="#f4c4a4" stroke-width="4" stroke-linecap="round"/>
+    <g transform="translate(90 338) rotate(-12)"><path d="M-40 1c-4-34 25-53 49-41S49-5 38 22-25 46-40 1" fill="#e97466"/><path d="M-26-14q8-11 19-9" fill="none" stroke="#ffffff75" stroke-width="6" stroke-linecap="round"/><use href="#happy-face" x="-23" y="-6" width="46" height="28" style="color:#743f3e"/></g>
+    <g transform="translate(387 374) rotate(8)"><path d="M-43-3c-3-32 21-51 49-40S53-8 38 20-30 47-43-3" fill="#699cd2"/><path d="M-26-17q9-10 18-7" fill="none" stroke="#ffffff75" stroke-width="6" stroke-linecap="round"/><use href="#happy-face" x="-23" y="-9" width="46" height="28" style="color:#234f74"/></g>
+    <g class="bee-drift"><g transform="translate(400 213) rotate(-15)"><ellipse cx="-6" cy="-15" rx="10" ry="15" fill="#fffdf5" transform="rotate(-25 -6 -15)"/><ellipse cx="8" cy="-15" rx="10" ry="15" fill="#fffdf5" transform="rotate(25 8 -15)"/><ellipse rx="22" ry="16" fill="#e9c75f"/><path d="M-7-14v28M2-16v32" stroke="#6e7051" stroke-width="5"/><circle cx="13" cy="-3" r="2" fill="#586448"/></g></g>
+    <g fill="#91ac75"><path d="m119 405-7-24 13 18 7-25 1 30z"/><path d="m345 421-7-22 13 18 7-25 1 30z"/></g><path d="M119 230q-29 7-22 31" fill="none" stroke="#bccb9d" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
+   </svg>
+  </section>
+  <div class="intro-bottom" id="intro-bottom"><span><i class="little-dot" style="background:#ac8dcc"></i>Big ideas. Little hands.</span><span><i class="little-dot" style="background:#e5af60"></i>8 paints. Endless possibilities.</span><span><i class="little-dot" style="background:#89ac72"></i>Play at your own pace</span></div>
+  <section class="game" id="game" hidden aria-label="Color mixing game">
+   <div class="challenge-tools" id="challenge-tools"><div class="adventure-choices" id="game-adventures" role="group" aria-label="Choose your color adventure"></div><p class="level-description" id="level-description">Three scoops. So many secret recipes!</p></div>
+   <div class="board" id="board">
+    <div id="play-screen">
+     <div class="board-top"><span class="round-label" id="round-label">Let’s grow a garden</span><div class="garden-progress" id="garden-progress" aria-label="0 of 5 flowers grown"><span class="progress-label">Your flowers</span><span id="progress-flowers" style="display:flex;gap:4px"></span></div></div>
+     <div class="challenge"><h1 id="challenge-title">Let’s make <span class="color-word">purple!</span></h1><button class="listen-btn" id="listen-button" aria-label="Hear the instructions again"><svg class="icon" aria-hidden="true"><use href="#i-sound"/></svg></button></div>
+     <p class="instruction" id="instruction">Three scoops. Eight paints. Find the secret recipe!</p>
+     <section class="color-results" id="compare-strip" aria-label="Color garden" hidden>
+      <svg class="result-landscape" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true"><path d="M0 347q230-80 480-19t520-18v90H0" fill="#edf2df"/><path d="M0 374q290-66 540-19t460-13v58H0" fill="#e2eccf"/><g fill="#a1b981"><path d="m82 369-8-20 14 14 5-23 3 26zM902 364l-8-20 14 14 5-23 3 26z"/></g><g class="scene-cloud" fill="#edf0e3"><path d="M65 70c-21 0-20-26-2-27 5-26 43-23 45 2 26-5 31 25 6 25z"/><path d="M837 128c-16 0-16-19-2-21 5-19 31-16 33 2 18-4 23 19 5 19z"/></g></svg>
+      <div class="result-grid">
+       <figure class="result-card" id="target-result-card"><figcaption class="result-heading"><svg class="icon" aria-hidden="true"><use href="#i-sprout"/></svg>Make this!</figcaption><button class="result-swatch character-target" id="target-swatch" type="button" aria-label="Hear the flower color"><svg class="paint-character" viewBox="0 0 300 300" aria-hidden="true"><g class="buddy-blob"><use href="#paint-pal-body"/></g><g class="buddy-flower"><use href="#flower-pal-body"/></g><g class="character-sparkles"><path d="m35 45 4 11 11 4-11 4-4 11-4-11-11-4 11-4zM262 48l3 9 10 3-10 3-3 10-3-10-10-3 10-3zM265 207l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/></g></svg></button><p class="result-color-name" id="target-color-name"></p></figure>
+       <figure class="result-card" id="actual-result-card"><figcaption class="result-heading"><svg class="icon" aria-hidden="true"><use id="result-kind-icon" href="#i-mix"/></svg><span id="actual-result-label">Your color friend</span></figcaption><button class="result-swatch" id="actual-swatch" type="button" aria-label="Make your color friend dance"><svg class="paint-character" viewBox="0 0 300 300" aria-hidden="true"><g class="buddy-blob"><use href="#paint-pal-body"/></g><g class="buddy-flower"><use href="#flower-pal-body"/></g><g class="character-sparkles"><path d="m35 45 4 11 11 4-11 4-4 11-4-11-11-4 11-4zM262 48l3 9 10 3-10 3-3 10-3-10-10-3 10-3zM265 207l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/></g></svg></button><p class="result-color-name" id="actual-color-name"></p></figure>
+      </div>
+      <p class="result-feedback" id="compare-note"></p><p class="result-recipe" id="result-recipe"></p><div class="garden-plot" id="garden-plot" role="img" aria-label="Flowers in your garden"></div><p class="result-caption"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg><span id="result-play-caption">Tap your color friend for a little wiggle!</span></p>
+     </section>
+     <div class="scene" id="scene">
+      <svg class="scene-svg" viewBox="0 0 1000 260" preserveAspectRatio="xMidYMax meet" role="img" aria-labelledby="scene-title"><title id="scene-title">A purple flower waiting to grow in your garden</title>
+       <path d="M0 227q193-96 392-18T1000 196v64H0" fill="#edf2df"/><path d="M0 253q245-80 479-30T1000 223v37H0" fill="#e0eacb"/>
+       <g opacity=".9"><g class="scene-sun" stroke="#e8ce7c" stroke-width="3" stroke-linecap="round"><path d="M797 24v-7m0 88v-7m-37-37h-7m88 0h-7m-63-26-5-5m62 62-5-5m0-52 5-5m-62 62 5-5"/></g><circle cx="797" cy="61" r="26" fill="#f3dd91"/><circle cx="789" cy="59" r="1.8" fill="#7c8155"/><circle cx="805" cy="59" r="1.8" fill="#7c8155"/><path d="M792 67q5 5 10 0" fill="none" stroke="#7c8155" stroke-width="1.7" stroke-linecap="round"/></g>
+       <g fill="#edf0e3"><path d="M170 58c-21 0-20-26-2-27 5-26 43-23 45 2 26-5 31 25 6 25z"/><path d="M687 112c-16 0-16-19-2-21 5-19 31-16 33 2 18-4 23 19 5 19z"/></g>
+       <g id="garden-decor" fill="#a1b981"><path d="m195 223-9-21 14 14 7-24 2 29z"/><path d="m732 234-9-21 14 14 7-24 2 29z"/><path d="m305 223-5-14 10 9 4-20 1 23z"/><path d="m861 235-6-17 11 12 5-22 1 27z"/></g>
+       <g id="challenge-flower"><g class="flower-stem"><path d="M500 223V91" stroke="#6d9b69" stroke-width="9" stroke-linecap="round"/><path d="M498 185c-40 0-63-23-61-46 36 0 57 19 61 46" fill="#9abb7f"/><path d="M503 165c41 0 57-24 54-45-32 2-50 20-54 45" fill="#7ea76d"/><path d="m449 151 41 29m23-23 34-26" stroke="#648c58" stroke-width="1.7" stroke-linecap="round"/></g>
+        <g class="target-petals" id="target-petals" fill="#aa89d2"><ellipse cx="500" cy="54" rx="27" ry="36"/><ellipse cx="500" cy="136" rx="27" ry="36"/><ellipse cx="459" cy="95" rx="36" ry="27"/><ellipse cx="541" cy="95" rx="36" ry="27"/><ellipse cx="470" cy="65" rx="26" ry="34" transform="rotate(-45 470 65)"/><ellipse cx="530" cy="125" rx="26" ry="34" transform="rotate(-45 530 125)"/><ellipse cx="530" cy="65" rx="26" ry="34" transform="rotate(45 530 65)"/><ellipse cx="470" cy="125" rx="26" ry="34" transform="rotate(45 470 125)"/></g>
+        <circle cx="500" cy="95" r="36" fill="#ffe3a0"/><g fill="#566745"><ellipse cx="487" cy="91" rx="2.8" ry="3.8"/><ellipse cx="513" cy="91" rx="2.8" ry="3.8"/></g><path d="M491 102q9 10 18 0" fill="none" stroke="#566745" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="477" cy="102" rx="5" ry="3" fill="#efbd98"/><ellipse cx="523" cy="102" rx="5" ry="3" fill="#efbd98"/>
+       </g>
+       <g id="free-bowl" class="free-bowl" hidden><ellipse cx="500" cy="213" rx="103" ry="17" fill="#c9d9b3"/><path d="M408 137q8 83 92 83t92-83" fill="#dca789"/><path d="M420 152q18 61 80 61" fill="none" stroke="#bd896f" stroke-width="5" stroke-linecap="round"/><ellipse cx="500" cy="137" rx="92" ry="27" fill="#e9bda0"/><ellipse id="bowl-paint" cx="500" cy="135" rx="79" ry="20" fill="#fff9e8"/><path d="M449 135q27-16 69-10" fill="none" stroke="#ffffff70" stroke-width="4" stroke-linecap="round"/><g fill="#735441"><ellipse cx="481" cy="176" rx="3" ry="4"/><ellipse cx="519" cy="176" rx="3" ry="4"/></g><path d="M491 188q9 9 18 0" fill="none" stroke="#735441" stroke-width="2.8" stroke-linecap="round"/><path d="m534 126 36-72" stroke="#b58d67" stroke-width="11" stroke-linecap="round"/><path d="m534 126 33-67" stroke="#d7b58d" stroke-width="4" stroke-linecap="round"/></g>
+       <g class="scene-butterfly"><path d="M352 90c-38-31-40 12-7 12-35 3-10 31 7 1 18 30 43 2 8-1 33 0 31-43-7-12" fill="#e9b27e"/><path d="M352 91v15" stroke="#9b845f" stroke-width="3" stroke-linecap="round"/></g>
+       <g transform="translate(647 218)"><ellipse cx="0" cy="1" rx="13" ry="11" fill="#db826d"/><path d="M0-9v20" stroke="#6a7350" stroke-width="1.5"/><circle cx="-5" cy="-1" r="2" fill="#6a7350"/><circle cx="5" cy="4" r="2" fill="#6a7350"/><circle cx="5" cy="-3" r="2" fill="#6a7350"/><circle cy="-10" r="5" fill="#6a7350"/></g>
+       <g class="rainbow-sparkles" fill="#e6b753"><path d="m390 63 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><path d="m602 35 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><path d="m603 153 3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></g>
+      </svg><div class="scene-caption" id="scene-caption">A little flower is waiting for you</div>
+     </div>
+     <div class="mix-zone" id="mix-zone"><div class="mix-row many-scoops" id="mix-row"><div class="scoops" id="scoops" role="group" aria-label="Your paint scoops"></div><button class="primary mix-action" id="mix-button" disabled><svg class="icon" aria-hidden="true"><use href="#i-mix"/></svg><span id="mix-label">Mix it!</span></button></div><div class="status" id="status" role="status" aria-live="polite" aria-atomic="true">Find the secret recipe!</div><div class="hint-recipe" id="hint-recipe" aria-label="A suggested recipe"></div></div>
+    </div>
+    <section class="end-screen" id="end-screen" hidden aria-labelledby="end-title"><p class="eyebrow">Made by a little color magician</p><h1 id="end-title">Look what you grew!</h1><p id="end-description">Five tricky shades. So many lovely colors.</p><div class="bouquet" id="bouquet" role="img" aria-label="Your garden of five colorful flowers"></div><p>You made a little magic.</p><div class="end-actions"><button class="primary" id="again-button"><svg class="icon" aria-hidden="true"><use href="#i-sprout"/></svg>Grow another!</button><button class="secondary" id="end-free-button"><svg class="icon" aria-hidden="true"><use href="#i-mix"/></svg>Just mix</button></div></section>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+   </div>
+   <div id="palette-section"><div class="paint-tray" id="paint-tray" role="group" aria-label="Choose two paints"></div><div class="tool-line"><button class="hint-btn" id="hint-button"><svg class="icon" aria-hidden="true"><use href="#i-hint"/></svg><span>A little hint</span></button><button class="clear-btn" id="clear-button" disabled>Empty the scoops</button></div></div>
+  </section>
+ </main>
+ <footer class="footer" id="footer" hidden><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>A little curiosity goes a long way.<span aria-hidden="true">·</span><button id="parent-button">Grown-ups</button></footer>
+</div>
+<dialog id="guide"><div class="dialog-heading"><h2>For color-loving grown-ups</h2><button class="icon-btn" id="close-guide" aria-label="Close the guide"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div><p><strong>A bigger challenge:</strong> help a flower bloom by matching its shade using eight paints. Tap a paint more than once to change its strength. Every scoop is the same size.</p><div class="recipe-list"><span><strong>Color explorer</strong><br>2 scoops · new combinations</span><span><strong>Color wizard</strong><br>3 scoops · ratios and tints</span><span><strong>Mix master</strong><br>4 scoops · ratios, tints, and shades</span><span><strong>Just mix</strong><br>Explore freely with 2–4 scoops</span></div><p>The game starts at <strong>Color wizard</strong>. Choose an adventure with the illustrated Explorer, Wizard, and Master buttons. Each level keeps its garden while you play. After an experiment, <strong>Adjust mix</strong> lets your child remove and replace one scoop.</p><p><strong>Hints stay optional.</strong> The first gives a clue about the color. The second shows one recipe, including repeated scoops. Different recipes that make the same shade also count.</p><p class="small-note">This is a simplified paint playground. Orange, green, and purple contain equal amounts of their two starting colors. For example, 2 blue + 1 yellow and 1 blue + 2 green are equivalent here. Very close shades count too. Real paints can behave differently depending on pigment strength and amounts.</p><p class="small-note">No timers, lost lives, accounts, ads, or tracking. Works offline as a single file. Spoken prompts use your browser’s voice, when available. Keyboard: Tab, then Enter or Space to tap.</p><div class="dialog-actions"><button class="secondary" id="guide-done">Back to the garden<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div></dialog>
+<script>
+// An illustrative toy-paint model, not a prediction for specific real pigments.
+// Secondary paints contain equal parts of their two base pigments. This lets
+// equivalent recipes work while keeping equal-size scoops meaningful.
+const PaintLab = (() => {
+  'use strict';
+  const palette = ['red', 'yellow', 'blue', 'orange', 'green', 'purple', 'white', 'black'];
+  const pigmentUnits = {
+    red: [2,0,0,0,0], yellow: [0,2,0,0,0], blue: [0,0,2,0,0],
+    orange: [1,1,0,0,0], green: [0,1,1,0,0], purple: [1,0,1,0,0],
+    white: [0,0,0,2,0], black: [0,0,0,0,2]
+  };
+  const anchors = {
+    white: [255,253,242], black: [48,57,62],
+    red: [233,98,85], yellow: [242,205,82], blue: [74,139,200],
+    orange: [238,152,78], green: [118,168,95], purple: [147,109,189],
+    brown: [138,107,78]
+  };
+  const registeredNames = new Map();
+  const clamp = (n, min=0, max=1) => Math.min(max, Math.max(min, n));
+  const lerp = (a,b,t) => a.map((v,i)=>v+(b[i]-v)*t);
+  const gcd = (a,b) => b ? gcd(b,a%b) : a;
+  const keyForUnits = units => {
+    const divisor = units.reduce((a,b)=>gcd(a,b),0) || 1;
+    return units.map(n=>n/divisor).join(':');
+  };
+  function unitsFor(picks) {
+    if (!Array.isArray(picks) || !picks.length) throw new TypeError('Choose at least one paint.');
+    const units=[0,0,0,0,0];
+    picks.forEach(id=>{
+      if (!Object.hasOwn(pigmentUnits,id)) throw new TypeError(`Unknown paint: ${String(id)}`);
+      pigmentUnits[id].forEach((amount,i)=>units[i]+=amount);
+    });
+    return units;
+  }
+  // Trilinear interpolation in a calibrated RYB pigment cube. RGB values are
+  // display anchors only; mixing amounts are accumulated in pigment space.
+  function pigmentRgb(r,y,b) {
+    const greatest=Math.max(r,y,b);
+    if (!greatest) return [...anchors.white];
+    r/=greatest; y/=greatest; b/=greatest;
+    const noBlue=lerp(lerp(anchors.white,anchors.red,r),lerp(anchors.yellow,anchors.orange,r),y);
+    const withBlue=lerp(lerp(anchors.blue,anchors.purple,r),lerp(anchors.green,anchors.brown,r),y);
+    return lerp(noBlue,withBlue,b);
+  }
+  function rgbFor(units) {
+    const [r,y,b,w,k]=units, pigment=r+y+b;
+    if (!pigment) return lerp(anchors.white,anchors.black,k/(w+k));
+    let rgb=pigmentRgb(r,y,b);
+    // White makes a tint; black makes a shade. Their strengths are deliberately
+    // gentle and predictable for the game, rather than pigment-specific claims.
+    const tint=1-Math.pow(1-w/(pigment+w),1.25);
+    rgb=lerp(rgb,anchors.white,tint);
+    const shade=1-Math.pow(1-k/(pigment+w+k),.85);
+    return lerp(rgb,anchors.black,shade);
+  }
+  const hexFor = rgb => '#'+rgb.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
+  const rgbForHex = hex => [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
+  function linearChannel(v) { v/=255; return v<=.04045 ? v/12.92 : Math.pow((v+.055)/1.055,2.4); }
+  function luminance(rgb) { const [r,g,b]=rgb.map(linearChannel); return .2126*r+.7152*g+.0722*b; }
+  function oklab(rgb) {
+    const [r,g,b]=rgb.map(linearChannel);
+    const l=Math.cbrt(.4122214708*r+.5363325363*g+.0514459929*b);
+    const m=Math.cbrt(.2119034982*r+.6806995451*g+.1073969566*b);
+    const s=Math.cbrt(.0883024619*r+.2817188376*g+.6299787005*b);
+    return [.2104542553*l+.793617785*m-.0040720468*s,
+      1.9779984951*l-2.428592205*m+.4505937099*s,
+      .0259040371*l+.7827717662*m-.808675766*s];
+  }
+  function distance(a,b) {
+    const aa=oklab(rgbForHex(a.hex)), bb=oklab(rgbForHex(b.hex));
+    return Math.hypot(...aa.map((v,i)=>v-bb[i]));
+  }
+  function genericName(units) {
+    let [r,y,b,w,k]=units;
+    const pigment=r+y+b, total=pigment+w+k;
+    if (!pigment) {
+      if (!k) return 'white';
+      if (!w) return 'black';
+      return k/total<.4?'light gray':k/total>.6?'dark gray':'gray';
+    }
+    const smallest=Math.min(r,y,b), greatest=Math.max(r,y,b);
+    let family;
+    if (smallest/greatest>=.5) family='brown';
+    else {
+      r-=smallest; y-=smallest; b-=smallest;
+      if (!y&&!b) family='red';
+      else if (!r&&!b) family='yellow';
+      else if (!r&&!y) family='blue';
+      else if (!b) family=r/y>1.3?'red-orange':y/r>1.3?'golden orange':'orange';
+      else if (!r) family=y/b>1.3?'yellow-green':b/y>1.3?'teal':'green';
+      else family=r/b>1.3?'berry purple':b/r>1.3?'blue violet':'purple';
+      if (smallest && family!=='brown') family='muted '+family;
+    }
+    if (k/total>=.19) return 'deep '+family;
+    if (w/total>=.18) {
+      const tints={red:'pink',yellow:'butter yellow',blue:'sky blue',orange:'peach',green:'mint',purple:'lavender',brown:'sand'};
+      return tints[family] || 'soft '+family;
+    }
+    return family;
+  }
+  function swatch(units,key,name) {
+    const rgb=rgbFor(units);
+    return {
+      key, name, hex:hexFor(rgb),
+      // ink is for headings on light paper; face is for eyes on the paint blob.
+      ink:hexFor(lerp(rgb,[36,57,49],.65)),
+      face:luminance(rgb)<.24?'#fff9e8':'#344f40',
+      units:[...units]
+    };
+  }
+  function mix(picks) {
+    const units=unitsFor(picks), key=keyForUnits(units);
+    return swatch(units,key,registeredNames.get(key)||genericName(units));
+  }
+  function registerRecipe(name,picks) {
+    if (typeof name!=='string' || !name.trim()) throw new TypeError('A color needs a name.');
+    const units=unitsFor(picks),key=keyForUnits(units);
+    registeredNames.set(key,name.trim());
+    return swatch(units,key,name.trim());
+  }
+  function matches(actual,target) {
+    if (!actual || !target) return false;
+    if (actual.key===target.key) return true;
+    // A very small visual tolerance avoids requiring an invisible distinction
+    // between nearly identical shades. It is not a real-paint accuracy claim.
+    return distance(actual,target)<=.017;
+  }
+  const colors={};
+  palette.forEach(id=>{
+    registeredNames.set(keyForUnits(pigmentUnits[id]),id);
+    colors[id]=mix([id]);
+  });
+  return {palette:[...palette],colors,mix,matches,registerRecipe,distance};
+})();
+
+(() => {
+ 'use strict';
+ const $ = id => document.getElementById(id);
+ const colors = PaintLab.colors;
+ const palette = PaintLab.palette;
+ const levels = {
+  explorer:{name:'Color explorer',scoops:2,description:'8 paints · New color combinations'},
+  wizard:{name:'Color wizard',scoops:3,description:'8 paints · Ratios, tints, and secret recipes'},
+  master:{name:'Mix master',scoops:4,description:'8 paints · Tricky ratios, tints, and darker shades'}
+ };
+ const recipeData = {
+  explorer:[
+   ['teal',['blue','green'],'Bring blue and green together.'],
+   ['lime',['yellow','green'],'Give green a sunny yellow glow.'],
+   ['red-orange',['red','orange'],'Make orange lean toward red.'],
+   ['violet',['blue','purple'],'Give purple a little more blue.'],
+   ['peach',['orange','white'],'Soften a warm orange with white.'],
+   ['lavender',['purple','white'],'Make purple lighter with white.']
+  ],
+  wizard:[
+   ['ocean teal',['blue','blue','yellow'],'Make green with more blue than yellow.'],
+   ['leaf green',['yellow','yellow','blue'],'Make green with more yellow than blue.'],
+   ['sunset orange',['red','red','yellow'],'Make orange with more red than yellow.'],
+   ['golden orange',['red','yellow','yellow'],'Make orange with more yellow than red.'],
+   ['berry purple',['red','red','blue'],'Make purple with more red than blue.'],
+   ['blue violet',['red','blue','blue'],'Make purple with more blue than red.'],
+   ['warm peach',['red','yellow','white'],'Start with orange, then soften it with white.'],
+   ['mint',['yellow','blue','white'],'Start with green, then soften it with white.'],
+   ['lilac',['red','blue','white'],'Start with purple, then soften it with white.']
+  ],
+  master:[
+   ['coral',['red','red','yellow','white'],'Make a red-rich orange, then soften it with white.'],
+   ['apricot',['red','yellow','yellow','white'],'Make a yellow-rich orange, then soften it with white.'],
+   ['pistachio',['yellow','yellow','blue','white'],'Make a yellow-rich green, then soften it with white.'],
+   ['seafoam',['yellow','blue','blue','white'],'Make a blue-rich green, then soften it with white.'],
+   ['orchid',['red','red','blue','white'],'Make a red-rich purple, then soften it with white.'],
+   ['periwinkle',['red','blue','blue','white'],'Make a blue-rich purple, then soften it with white.'],
+   ['midnight blue',['blue','blue','blue','black'],'Darken lots of blue with just a little black.'],
+   ['forest green',['green','green','green','black'],'Darken lots of green with just a little black.'],
+   ['cinnamon',['orange','orange','orange','black'],'Darken lots of orange with just a little black.']
+  ]
+ };
+ const recipes = Object.fromEntries(Object.entries(recipeData).map(([level,rows])=>[level,rows.map(([name,picks,hint])=>({...PaintLab.registerRecipe(name,picks),picks,hint,level}))]));
+ const state = {started:false,mode:'garden',level:'wizard',sound:true,phase:'choose',picks:[],deck:[],round:0,grown:[],hint:0,result:null};
+ const gardens = new Map(), bags = new Map(), wiggleVersions = new Map();
+ let audioContext = null;
+ const activeTones = new Set();
+ let generation = 0;
+ let voice = null;
+ let lastTarget = null;
+ const timers = new Set();
+ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+ const icon = name => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+ const capitalize = text => text[0].toUpperCase()+text.slice(1);
+ const schedule = (fn, delay) => {
+  const token = generation;
+  const handle = window.setTimeout(() => { timers.delete(handle); if (token === generation) fn(); },delay);
+  timers.add(handle);
+  return handle;
+ };
+ function cancelPending(){
+  generation++;
+  timers.forEach(handle => clearTimeout(handle)); timers.clear();
+  $('mix-zone').classList.remove('mixing');
+  $('free-bowl').classList.remove('mixing-bowl');
+  $('scene').classList.remove('flower-celebrate');
+  document.querySelectorAll('.result-swatch').forEach(button=>button.classList.remove('is-booping'));
+  $('confetti-layer').replaceChildren();
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+ }
+ function findVoice(){
+  if (!('speechSynthesis' in window)) return;
+  const available = window.speechSynthesis.getVoices();
+  voice = available.find(v => /^en-US$/i.test(v.lang) && v.localService && /zira|samantha|jenny/i.test(v.name)) || available.find(v => /^en/i.test(v.lang) && v.localService) || available.find(v => /^en/i.test(v.lang)) || null;
+ }
+ findVoice();
+ if ('speechSynthesis' in window) window.speechSynthesis.addEventListener('voiceschanged',findVoice);
+ function speak(text){
+  if (!state.sound || $('guide').open || document.hidden || !('speechSynthesis' in window)) return;
+  try {
+   window.speechSynthesis.cancel();
+   const utterance = new SpeechSynthesisUtterance(text);
+   if (voice) utterance.voice = voice;
+   utterance.lang='en-US'; utterance.rate=.86; utterance.pitch=1.12; utterance.volume=.85;
+   window.speechSynthesis.speak(utterance);
+  } catch (_) { /* Voice is optional; the visual game works without it. */ }
+ }
+ function wakeAudio(){
+  if (!state.sound || $('guide').open) return;
+  try {
+   const Audio = window.AudioContext || window.webkitAudioContext;
+   if (!Audio) return;
+   if (!audioContext) audioContext = new Audio();
+   if (audioContext.state==='suspended') audioContext.resume().catch(()=>{});
+  } catch (_) { /* Sound is optional. */ }
+ }
+ function notes(kind='tap'){
+  if (!state.sound || $('guide').open || document.hidden || !audioContext || audioContext.state!=='running') return;
+  const tunes={tap:[440],mix:[330,392,440],win:[523,659,784,1047],finish:[523,659,784,659,784,1047]};
+  const sequence=tunes[kind] || tunes.tap;
+  const start=audioContext.currentTime;
+  try {
+   sequence.forEach((hz,i)=>{
+    const oscillator=audioContext.createOscillator(), gain=audioContext.createGain();
+    oscillator.type='sine'; oscillator.frequency.value=hz;
+    const t=start+i*.13;
+    gain.gain.setValueAtTime(0,t); gain.gain.linearRampToValueAtTime(.055,t+.025);gain.gain.exponentialRampToValueAtTime(.001,t+.28);
+    oscillator.connect(gain);gain.connect(audioContext.destination);activeTones.add(oscillator);oscillator.start(t);oscillator.stop(t+.3);
+    oscillator.onended=()=>{activeTones.delete(oscillator);oscillator.disconnect();gain.disconnect();};
+   });
+  } catch (_) { /* Keep playing if an audio device is unavailable. */ }
+ }
+ function silenceAudio(){
+  activeTones.forEach(tone=>{try{tone.stop();}catch(_){}});activeTones.clear();
+ }
+
+ function shuffle(items){
+  const result=[...items];
+  for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}
+  return result;
+ }
+ function newDeck(){
+  const pool=recipes[state.level], deck=[];
+  let bag=bags.get(state.level)||[];
+  while(deck.length<5){
+   if(!bag.length)bag=shuffle(pool);
+   let index=bag.findIndex(r=>!deck.some(d=>d.key===r.key));
+   if(index===-1){bag=[...bag,...shuffle(pool.filter(r=>!deck.some(d=>d.key===r.key)))];continue;}
+   if(!deck.length && bag[index].key===lastTarget){const other=bag.findIndex(r=>r.key!==lastTarget);if(other>=0)index=other;}
+   deck.push(bag.splice(index,1)[0]);
+  }
+  bags.set(state.level,bag);return deck;
+ }
+ function target(){return state.deck[state.round];}
+ function scoopLimit(){return state.mode==='free'?4:levels[state.level].scoops;}
+ function enoughPaint(){return state.mode==='free'?state.picks.length>=2:state.picks.length===scoopLimit();}
+ function counted(picks){
+  const counts=new Map();picks.forEach(id=>counts.set(id,(counts.get(id)||0)+1));
+  return [...counts].map(([id,n])=>`${n} ${colors[id].name}`).join(' + ');
+ }
+ function spokenRecipe(picks){
+  const counts=new Map();picks.forEach(id=>counts.set(id,(counts.get(id)||0)+1));
+  return [...counts].map(([id,n])=>`${n} scoop${n===1?'':'s'} of ${colors[id].name}`).join(' and ');
+ }
+ function prompt(){
+  if(state.phase==='complete')return 'Look what you grew! Five tricky colors. You are a color magician!';
+  if(state.phase==='mixing')return 'Swish, swish. Mixing your colors!';
+  if(state.phase==='won')return `You found ${target().name}! Tap ${state.grown.length===5?'My garden':'Next flower'}.`;
+  if(state.phase==='retry')return `You made ${state.result.name}. Let’s match ${target().name}. Tap Adjust mix to change a scoop.`;
+  if(state.phase==='explored')return `You made ${state.result.name}! Tap Mix more to try another mix.`;
+  if(state.mode==='free')return 'Try two, three, or four scoops. You can tap the same paint more than once. Then tap Mix it!';
+  return `Let’s make ${target().name}! Use ${scoopLimit()} scoops. You can tap the same paint more than once. Then tap Mix it!`;
+ }
+ function updateSound(){
+  $('sound-icon').setAttribute('href',state.sound?'#i-sound':'#i-muted');
+  $('sound-label').textContent=state.sound?'Sound on':'Sound off';
+  $('sound-button').setAttribute('aria-label',state.sound?'Turn sound off':'Turn sound on');
+  $('sound-button').setAttribute('aria-pressed',String(state.sound));
+ }
+ function setStatus(text){$('status').textContent=text;}
+ function updateProgress(){
+  $('progress-flowers').innerHTML=Array.from({length:5},(_,i)=>`<svg class="mini-flower${i<state.grown.length?' filled':''}" viewBox="0 0 50 50" style="color:${i<state.grown.length?state.grown[i].hex:'#e1e6d5'}" aria-hidden="true"><use href="#flower-mark"/></svg>`).join('');
+  $('garden-progress').setAttribute('aria-label',`${state.grown.length} of 5 flowers grown`);
+ }
+ function buildAdventures(){
+  for(const id of ['welcome-adventures','game-adventures']){
+   $(id).innerHTML=Object.entries(levels).map(([key,level])=>`<button class="adventure-choice" type="button" data-level="${key}" aria-label="${level.name}, ${level.scoops} scoops" aria-pressed="${state.level===key}"><svg class="adventure-illustration" viewBox="0 0 80 74" aria-hidden="true"><use href="#adventure-${key}"/></svg><span class="adventure-copy"><span class="adventure-name">${key==='explorer'?'Explorer':key==='wizard'?'Wizard':'Master'}</span><span class="adventure-count">${level.scoops} scoops</span><span class="scoop-dots" aria-hidden="true">${'<i></i>'.repeat(level.scoops)}</span></span></button>`).join('');
+   $(id).querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+    const level=button.dataset.level;
+    if(state.started)changeLevel(level);
+    else{state.level=level;updateAdventures();wakeAudio();speak(`${levels[level].name}. ${levels[level].scoops} scoops. Let’s make some magic!`);}
+   }));
+  }
+  updateAdventures();
+ }
+ function updateAdventures(){
+  document.querySelectorAll('.adventure-choice').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.level===state.level)));
+  $('welcome-adventure-description').textContent={explorer:'Two scoops. A world of new colors!',wizard:'Three scoops. So many secret recipes!',master:'Four scoops. A bigger kind of color magic!'}[state.level];
+  $('level-description').textContent=levels[state.level].description;
+ }
+ function buildPalette(){
+  $('paint-tray').innerHTML=palette.map((id,i)=>{
+   const c=colors[id];
+   return `<button class="paint-button" data-color="${id}" style="--paint:${c.hex};--paint-ink:${c.face};--tilt:${[-7,5,-4,7][i%4]}deg" aria-label="Add ${c.name} paint"><span class="scoop-count" aria-hidden="true"></span><span class="paint-blob"><svg viewBox="0 0 46 28" aria-hidden="true"><use href="#happy-face"/></svg></span><span class="paint-label"><svg class="paint-symbol" aria-hidden="true"><use href="#s-${id}"/></svg>${capitalize(c.name)}</span></button>`;
+  }).join('');
+  $('paint-tray').querySelectorAll('button').forEach(button=>button.addEventListener('click',event=>choose(button.dataset.color,event.detail===0)));
+ }
+ function ensureScoops(){
+  const count=scoopLimit();
+  $('mix-row').classList.toggle('many-scoops',count>=3);
+  if($('scoops').querySelectorAll('button').length===count)return;
+  $('scoops').innerHTML=Array.from({length:count},(_,i)=>`${i?'<span class="operator" aria-hidden="true">+</span>':''}<button class="scoop" id="scoop-${i}" disabled aria-label="Scoop ${i+1}: empty">?</button>`).join('');
+  for(let i=0;i<count;i++)$(`scoop-${i}`).addEventListener('click',()=>removePick(i));
+ }
+ function renderPicks(){
+  ensureScoops();
+  for(let i=0;i<scoopLimit();i++){
+   const button=$(`scoop-${i}`), id=state.picks[i];
+   button.classList.toggle('selected',!!id);button.disabled=!id || state.phase!=='choose';
+   if(id){
+    const c=colors[id];button.style.setProperty('--paint',c.hex);button.style.setProperty('--paint-ink',c.face);
+    button.innerHTML=`<svg aria-hidden="true"><use href="#s-${id}"/></svg>${state.phase==='choose'?'<span class="remove-mark" aria-hidden="true">×</span>':''}<span class="scoop-number" aria-hidden="true">${i+1}</span>`;
+    button.setAttribute('aria-label',`Scoop ${i+1}: ${c.name}${state.phase==='choose'?'. Tap to remove':''}`);
+   }else{button.textContent=state.mode==='free'&&i>=2?'+':'?';button.style.removeProperty('--paint');button.setAttribute('aria-label',`Scoop ${i+1}: ${state.mode==='free'&&i>=2?'optional':'empty'}`);}
+  }
+  $('paint-tray').querySelectorAll('button').forEach(button=>{
+   const count=state.picks.filter(id=>id===button.dataset.color).length;
+   button.classList.toggle('has-scoop',count>0);button.querySelector('.scoop-count').textContent=count;
+   button.disabled=state.phase!=='choose'||state.picks.length>=scoopLimit();
+  });
+  $('mix-button').disabled=state.phase==='mixing'||(state.phase==='choose'&&!enoughPaint());
+  $('hint-button').disabled=state.phase!=='choose';
+  $('clear-button').disabled=state.phase==='mixing'||state.phase==='won'||!state.picks.length;
+ }
+ function setAction(label,iconName){$('mix-button').innerHTML=icon(iconName)+`<span id="mix-label">${label}</span>`;}
+ function showGoal(){
+  const c=target();
+  $('challenge-title').innerHTML=`Let’s make <span class="color-word" style="color:${c.ink}">${c.name}!</span>`;
+  $('target-petals').setAttribute('fill',c.hex);
+  $('scene-title').textContent=`Match this ${c.name} flower using ${scoopLimit()} scoops of paint.`;
+ }
+ function renderRound(){
+  cancelPending();state.phase='choose';state.picks=[];state.hint=0;state.result=null;
+  $('play-screen').hidden=false;$('end-screen').hidden=true;$('palette-section').hidden=false;
+  $('challenge-tools').hidden=state.mode==='free';$('garden-progress').hidden=state.mode==='free';$('hint-button').hidden=state.mode==='free';
+  $('challenge-flower').toggleAttribute('hidden',state.mode==='free');$('free-bowl').toggleAttribute('hidden',state.mode!=='free');
+  $('compare-strip').hidden=true;$('scene').hidden=false;$('hint-recipe').replaceChildren();
+  $('paint-tray').querySelectorAll('button').forEach(b=>b.classList.remove('is-hint'));
+  updateAdventures();
+  $('garden-plot').replaceChildren();
+  if(state.mode==='garden'){
+   showGoal();
+   $('instruction').textContent=`Use ${scoopLimit()} scoops. Tap the same paint again for more!`;
+   $('scene-caption').textContent='Match the color AND the shade';
+   $('round-label').textContent=`Flower ${state.round+1} of 5 · ${levels[state.level].name}`;
+   setStatus(`${scoopLimit()} scoops. Eight paints. Find the secret recipe!`);
+   $('paint-tray').setAttribute('aria-label',`Choose ${scoopLimit()} scoops of paint. Repeated colors are allowed.`);
+  }else{
+   $('challenge-title').textContent='What will you discover?';
+   $('instruction').textContent='Try 2, 3, or 4 scoops. Repeated paints make new shades.';
+   $('scene-title').textContent='A smiling mixing bowl ready for your paints';
+   $('scene-caption').textContent='More of one paint changes the color';
+   $('bowl-paint').setAttribute('fill','#fff9e8');$('round-label').textContent='Your color laboratory';
+   setStatus('Pick at least two scoops. What will happen?');
+   $('paint-tray').setAttribute('aria-label','Choose two to four scoops of any paints.');
+  }
+  setAction('Mix it!','mix');renderPicks();updateProgress();
+ }
+ function updateMode(){
+  $('garden-mode').setAttribute('aria-pressed',String(state.mode==='garden'));$('free-mode').setAttribute('aria-pressed',String(state.mode==='free'));
+ }
+ function startGarden(){
+  state.mode='garden';state.deck=newDeck();state.round=0;state.grown=[];gardens.delete(state.level);
+  updateMode();renderRound();speak(prompt());
+ }
+ function start(){
+  state.started=true;
+  $('welcome').hidden=true;$('intro-bottom').hidden=true;$('game').hidden=false;$('mode-switch').hidden=false;$('footer').hidden=false;
+  $('header').classList.add('game-active');wakeAudio();startGarden();$('listen-button').focus({preventScroll:true});
+ }
+ function pickStatus(){
+  const remaining=scoopLimit()-state.picks.length;
+  if(enoughPaint()){
+   setStatus(`${counted(state.picks)}. ${state.mode==='free'&&remaining?'Mix now, or add another scoop!':'Ready to mix!'}`);
+  }else setStatus(`${state.picks.length} of ${scoopLimit()} scoops. Add ${state.mode==='free'?2-state.picks.length:remaining} more!`);
+ }
+ function choose(id,keyboard=false){
+  if(state.phase!=='choose'||state.picks.length>=scoopLimit())return;
+  wakeAudio();state.picks.push(id);notes('tap');renderPicks();pickStatus();
+  const count=state.picks.filter(c=>c===id).length;
+  const remaining=scoopLimit()-state.picks.length;
+  speak(`${count} scoop${count===1?'':'s'} of ${colors[id].name}. ${enoughPaint()?(state.mode==='free'&&remaining?'You can mix now, or add another scoop.':'Now tap Mix it!'):`Add ${state.mode==='free'?2-state.picks.length:remaining} more scoop${(state.mode==='free'?2-state.picks.length:remaining)===1?'':'s'}.`}`);
+  if(keyboard&&state.picks.length===scoopLimit())$('mix-button').focus({preventScroll:true});
+ }
+ function removePick(index){
+  if(state.phase!=='choose'||!state.picks[index])return;
+  state.picks.splice(index,1);renderPicks();pickStatus();
+  speak(`Scoop removed. ${enoughPaint()?'You can mix now, or add a new paint.':'Choose another paint.'}`);
+ }
+ function confetti(){
+  if(reducedMotion.matches)return;
+  $('confetti-layer').innerHTML=Array.from({length:30},(_,i)=>`<i class="confetti" style="--left:${(i*37)%100}%;--delay:${(i%7)*.07}s;--confetti-color:${['#e9ad6a','#ae91d4','#92b77d','#79afcd','#e9a7b6'][i%5]};border-radius:${i%3===0?'50%':'3px'}"></i>`).join('');
+  schedule(()=>$('confetti-layer').replaceChildren(),2600);
+ }
+ function comparison(actual,goal){
+  const lightness=hex=>{
+   const rgb=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));
+   const luminance=.2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];
+   return luminance>.008856?116*Math.cbrt(luminance)-16:903.3*luminance;
+  };
+  const brightnessDifference=lightness(actual.hex)-lightness(goal.hex);
+  if(brightnessDifference>7)return 'Your mix looks lighter.';
+  if(brightnessDifference<-7)return 'Your mix looks darker.';
+  const normalized=c=>{const sum=c.units.reduce((a,b)=>a+b,0);return c.units.map(v=>v/sum);};
+  const a=normalized(actual),b=normalized(goal);
+  const differences=a.slice(0,3).map((v,i)=>v-b[i]);
+  const i=differences.indexOf(Math.max(...differences));
+  return differences[i]>.025?`Your mix has more ${['red','yellow','blue'][i]}.`:'A different shade. Let’s keep exploring!';
+ }
+ function showColorResult(actual,goal=null,feedback=''){
+  $('scene').hidden=true;
+  $('compare-strip').hidden=false;
+  $('compare-strip').dataset.mode=goal?'compare':'free';
+  $('compare-strip').dataset.result=state.phase;
+  $('compare-strip').setAttribute('aria-label',state.phase==='won'?'Your new flower is blooming':goal?'A flower to match and the color friend you mixed':'Your new color friend');
+  $('target-result-card').hidden=!goal||state.phase==='won';
+  if(goal){
+   $('target-swatch').style.setProperty('--result-color',goal.hex);
+   $('target-swatch').style.setProperty('--result-ink',goal.face);
+   $('target-swatch').setAttribute('aria-label',`Flower to match: ${goal.name}. Tap to hear its color.`);
+   $('target-color-name').textContent=capitalize(goal.name);
+  }
+  $('actual-swatch').style.setProperty('--result-color',actual.hex);
+  $('actual-swatch').style.setProperty('--result-ink',actual.face);
+  $('actual-swatch').setAttribute('aria-label',`${actual.name} ${state.phase==='won'?'flower':'color friend'}. Tap for a happy wiggle.`);
+  $('actual-color-name').textContent=capitalize(actual.name);
+  $('actual-result-label').textContent=state.phase==='won'?'You grew a flower!':'Your color friend';
+  $('result-kind-icon').setAttribute('href',state.phase==='won'?'#i-sprout':'#i-mix');
+  $('result-play-caption').textContent=state.phase==='won'?'Tap your flower for a happy dance!':'Tap your color friend for a little wiggle!';
+  $('compare-note').textContent=feedback;$('compare-note').hidden=!feedback;
+  $('result-recipe').textContent=counted(state.picks);
+  $('garden-plot').replaceChildren();
+  if(state.phase==='won'){
+   $('garden-plot').innerHTML='<span class="garden-plot-label">Your garden</span>'+state.grown.map(c=>`<svg viewBox="0 0 50 62" aria-hidden="true"><path d="M25 57V24" stroke="#7da36a" stroke-width="4" stroke-linecap="round"/><use href="#flower-mark" width="50" height="50" style="color:${c.hex}"/></svg>`).join('');
+   $('garden-plot').setAttribute('aria-label',`${state.grown.length} flowers in your garden: ${state.grown.map(c=>c.name).join(', ')}`);
+  }
+ }
+ function wiggleCharacter(kind){
+  if(state.phase==='mixing'||$('compare-strip').hidden)return;
+  const c=kind==='target'?target():state.result;
+  if(!c)return;
+  const button=$(kind+'-swatch');button.classList.remove('is-booping');
+  if(!reducedMotion.matches){
+   const version=(wiggleVersions.get(kind)||0)+1;wiggleVersions.set(kind,version);
+   void button.offsetWidth;button.classList.add('is-booping');
+   schedule(()=>{if(wiggleVersions.get(kind)===version)button.classList.remove('is-booping');},600);
+  }
+  wakeAudio();notes('tap');speak(`${capitalize(c.name)}!`);
+ }
+ function finishMix(){
+  $('mix-zone').classList.remove('mixing');$('free-bowl').classList.remove('mixing-bowl');
+  const c=PaintLab.mix(state.picks);state.result=c;
+  const equation=`${counted(state.picks)} → ${c.name}`;
+  if(state.mode==='free'){
+   state.phase='explored';$('bowl-paint').setAttribute('fill',c.hex);$('scene-title').textContent=`Your smiling mixing bowl now contains ${c.name} paint`;
+   $('challenge-title').innerHTML=`Meet <span style="color:${c.ink}">${c.name}!</span>`;
+   $('instruction').textContent='A new color friend from your very own recipe.';$('scene-caption').textContent=equation;
+   showColorResult(c);
+   setStatus('Try changing the amounts. What will you discover?');setAction('Mix more','again');
+   notes('win');speak(`You made ${c.name}! ${spokenRecipe(state.picks)}. What else could you make?`);$('scene').classList.add('flower-celebrate');
+  }else if(PaintLab.matches(c,target())){
+   state.phase='won';state.grown.push({...target()});lastTarget=target().key;updateProgress();
+   $('scene').classList.add('flower-celebrate');$('scene-caption').textContent=equation;
+   $('instruction').textContent=c.key===target().key?'Your color magic made a flower bloom!':'A lovely match! Your flower is blooming.';
+   showColorResult(c,target());
+   $('challenge-title').innerHTML=`Hello, <span style="color:${target().ink}">${target().name}!</span>`;
+   setStatus(['That was a clever mix! Look at your flower.','You matched the shade. Color magic!','A tricky color, a happy flower!'][state.round%3]);
+   setAction(state.grown.length===5?'My garden':'Next flower','arrow');
+   confetti();notes('win');speak(`${spokenRecipe(state.picks)}. You found ${target().name}! ${state.grown.length===5?'Tap My garden to see your flowers.':'Tap Next flower to keep growing.'}`);
+  }else{
+   state.phase='retry';$('challenge-flower').setAttribute('hidden','');$('free-bowl').removeAttribute('hidden');$('bowl-paint').setAttribute('fill',c.hex);
+   $('scene-title').textContent=`You mixed ${c.name}. Compare your paint to the ${target().name} target.`;
+   $('scene-caption').textContent=equation;$('instruction').textContent=`You discovered ${c.name}. Can you get closer?`;
+   const feedback=comparison(c,target());showColorResult(c,target(),feedback);
+   setStatus('Keep experimenting! You can change one scoop.');setAction('Adjust mix','again');notes('tap');
+   speak(`You made ${c.name}. ${feedback} Tap Adjust mix, then tap a scoop to change it.`);
+  }
+  renderPicks();
+ }
+ function adjustMix(){
+  cancelPending();state.phase='choose';
+  // Keep the last result beside the target while the child changes the recipe.
+  $('actual-result-label').textContent='Last mix';
+  $('compare-strip').dataset.result='adjusting';
+  $('actual-swatch').setAttribute('aria-label',`Last mixed color: ${state.result.name}`);
+  showGoal();
+  $('instruction').textContent='Tap a scoop to remove it. Choose a new paint!';
+  $('scene-caption').textContent='A small change can make a new shade';
+  setAction('Mix it!','mix');renderPicks();setStatus('Which scoop will you change?');
+  speak('Tap a scoop to remove it. Then choose a new paint.');
+ }
+ function mixAction(){
+  wakeAudio();if(state.phase==='mixing')return;
+  if(state.phase==='won'){
+   if(state.grown.length===5){showGarden();return;}
+   state.round++;renderRound();speak(prompt());return;
+  }
+  if(state.phase==='retry'){adjustMix();return;}
+  if(state.phase==='explored'){renderRound();speak(prompt());return;}
+  if(state.phase!=='choose'||!enoughPaint())return;
+  state.phase='mixing';$('mix-zone').classList.add('mixing');
+  if(state.mode==='free')$('free-bowl').classList.add('mixing-bowl');
+  $('paint-tray').querySelectorAll('button').forEach(b=>b.classList.remove('is-hint'));
+  setAction('Mixing…','mix');setStatus('Swish, swish… let’s see your shade!');renderPicks();
+  if('speechSynthesis' in window)window.speechSynthesis.cancel();
+  notes('mix');schedule(finishMix,reducedMotion.matches?250:1100);
+ }
+ function hint(){
+  if(state.mode!=='garden'||state.phase!=='choose')return;
+  state.hint=Math.min(state.hint+1,2);
+  if(state.hint===1){setStatus(target().hint);speak(target().hint);return;}
+  $('paint-tray').querySelectorAll('button').forEach(b=>b.classList.toggle('is-hint',target().picks.includes(b.dataset.color)));
+  $('hint-recipe').innerHTML=target().picks.map((id,i)=>`${i?'<span aria-hidden="true">+</span>':''}<span class="hint-dot" style="--paint:${colors[id].hex};--paint-ink:${colors[id].face}" aria-label="${colors[id].name}"><svg aria-hidden="true"><use href="#s-${id}"/></svg></span>`).join('');
+  const text=`One recipe: ${counted(target().picks)}.`;setStatus(text);speak(`One recipe is ${spokenRecipe(target().picks)}. Other recipes can work too!`);
+ }
+ function showGarden(){
+  cancelPending();state.phase='complete';$('play-screen').hidden=true;$('end-screen').hidden=false;$('palette-section').hidden=true;$('challenge-tools').hidden=false;
+  $('end-title').textContent='Color magic, mastered!';$('end-description').textContent=`Five beautiful shades. Made by a ${levels[state.level].name.toLowerCase()}.`;
+  $('bouquet').innerHTML=state.grown.map((c,i)=>{
+   const height=[80,30,0,35,75][i];
+   return `<svg class="bouquet-flower" viewBox="0 0 120 250" style="--rotate:${[-12,-5,0,7,13][i]}deg;--delay:${i*.12}s" aria-hidden="true"><path d="M60 235V${65+height}" stroke="#7da36a" stroke-width="7" stroke-linecap="round"/><path d="M59 199c-32 0-45-19-44-35 25 0 41 17 44 35" fill="#94b779"/><path d="M62 167c31 0 43-19 40-35-24 3-37 18-40 35" fill="#7ca567"/><use href="#flower-mark" x="8" y="${height}" width="104" height="104" style="color:${c.hex}"/><g fill="#61704e"><circle cx="54" cy="${height+49}" r="2"/><circle cx="66" cy="${height+49}" r="2"/></g><path d="M56 ${height+57}q4 5 8 0" stroke="#61704e" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>`;
+  }).join('');
+  $('bouquet').setAttribute('aria-label',`Your five flowers: ${state.grown.map(c=>c.name).join(', ')}`);
+  notes('finish');confetti();speak(prompt());$('again-button').focus({preventScroll:true});
+ }
+ function saveGarden(){
+  if(state.mode!=='garden')return;
+  gardens.set(state.level,{deck:state.deck,round:state.round,grown:[...state.grown],won:state.phase==='won',complete:state.phase==='complete'});
+ }
+ function restoreGarden(){
+  state.mode='garden';const saved=gardens.get(state.level);updateMode();
+  updateAdventures();
+  if(!saved){startGarden();return;}
+  state.deck=saved.deck;state.grown=[...saved.grown];state.round=saved.round+(saved.won?1:0);
+  if(saved.complete||state.grown.length===5)showGarden();else{renderRound();speak(prompt());}
+ }
+ function changeMode(mode){
+  if(mode===state.mode)return;wakeAudio();
+  if(mode==='free'){saveGarden();state.mode='free';renderRound();updateMode();speak(prompt());}
+  else restoreGarden();
+ }
+ function changeLevel(level){
+  if(!levels[level]||level===state.level)return;
+  saveGarden();cancelPending();state.level=level;wakeAudio();restoreGarden();
+ }
+ function clearPaint(){
+  if(state.phase==='mixing'||state.phase==='won')return;
+  renderRound();speak(prompt());
+ }
+ function openGuide(){
+  if('speechSynthesis' in window)window.speechSynthesis.cancel();silenceAudio();$('guide').showModal();
+ }
+ $('start-button').addEventListener('click',start);
+ $('sound-button').addEventListener('click',()=>{
+  state.sound=!state.sound;updateSound();
+  if(!state.sound){if('speechSynthesis' in window)window.speechSynthesis.cancel();silenceAudio();if(audioContext)audioContext.suspend().catch(()=>{});}
+  else{wakeAudio();if(state.started)speak(prompt());}
+ });
+ $('listen-button').addEventListener('click',()=>{state.sound=true;updateSound();wakeAudio();speak(prompt());});
+ $('mix-button').addEventListener('click',mixAction);$('hint-button').addEventListener('click',hint);$('clear-button').addEventListener('click',clearPaint);
+ $('garden-mode').addEventListener('click',()=>changeMode('garden'));$('free-mode').addEventListener('click',()=>changeMode('free'));
+ $('target-swatch').addEventListener('click',()=>wiggleCharacter('target'));
+ $('actual-swatch').addEventListener('click',()=>wiggleCharacter('actual'));
+ $('again-button').addEventListener('click',()=>{wakeAudio();startGarden();});$('end-free-button').addEventListener('click',()=>changeMode('free'));
+ $('help-button').addEventListener('click',openGuide);$('parent-button').addEventListener('click',openGuide);
+ $('close-guide').addEventListener('click',()=>$('guide').close());$('guide-done').addEventListener('click',()=>$('guide').close());
+ $('guide').addEventListener('close',()=>{wakeAudio();if(state.started)speak(prompt());});
+ $('guide').addEventListener('click',event=>{if(event.target===$('guide')){const r=$('guide').getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)$('guide').close();}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){if('speechSynthesis' in window)window.speechSynthesis.cancel();silenceAudio();}});
+ buildAdventures();buildPalette();updateSound();
+})();
+
+</script>
+</body>
+</html>
